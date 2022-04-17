@@ -6,22 +6,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessbag.data.models.WorkoutInCatalogModel
 import com.example.fitnessbag.data.repositories.WorkoutInCatalogRepository
+import com.example.fitnessbag.presentation.BaseViewModel
 import kotlinx.coroutines.launch
 
 class WorkoutCatalogViewModel(private val workoutInCatalogRepository: WorkoutInCatalogRepository
-) : ViewModel() {
-    
-    private val _loading = MutableLiveData(false)
-    val loading: LiveData<Boolean> = _loading
+) : BaseViewModel() {
 
     private val _categories = MutableLiveData<List<WorkoutInCatalogModel>>()
     val workouts: MutableLiveData<List<WorkoutInCatalogModel>> = _categories
 
     init {
         viewModelScope.launch {
-            _loading.value = true
+            startLoading()
             _categories.value = workoutInCatalogRepository.get().sortedByDescending { it.id }
-            _loading.value = false
+            stopLoading()
         }
     }
 }

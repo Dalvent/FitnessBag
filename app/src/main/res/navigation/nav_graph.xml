@@ -3,11 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/StartFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/StartFragment"
         android:name="com.example.fitnessbag.presentation.workouts_catalog.WorkoutsCatalogFragment"
         android:label="@string/workouts_fragment_label"
-        tools:layout="@layout/fragment_workouts"/>
+        tools:layout="@layout/fragment_workouts">
+        <action
+            android:id="@+id/action_workout_to_workout_detail"
+            app:destination="@id/WorkoutDetail" />
+        <action
+            android:id="@+id/action_StartFragment_to_createWorkoutFragment"
+            app:destination="@id/createWorkoutFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/WorkoutDetail"
+        android:name="com.example.fitnessbag.presentation.workout_detail.WorkoutDetailFragment"
+        android:label="@string/workouts_fragment_label" />
+    <fragment
+        android:id="@+id/createWorkoutFragment"
+        android:name="com.example.fitnessbag.presentation.create_workout.CreateWorkoutFragment"
+        android:label="create_workout_fragment"
+        tools:layout="@layout/create_workout_fragment" />
 </navigation>
