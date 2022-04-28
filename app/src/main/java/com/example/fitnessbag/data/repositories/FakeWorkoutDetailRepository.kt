@@ -110,4 +110,12 @@ class FakeWorkoutDetailRepository : WorkoutDetailRepository {
             )
         )
     }
+
+    override fun getExercise(workoutId: Int, exerciseNumber: Int) : ExerciseModel? {
+        val exercises = getWorkoutDetail(workoutId).exercises
+        if(exercises.size > exerciseNumber)
+            return exercises[exerciseNumber]
+        
+        return null
+    }
 }

@@ -22,10 +22,19 @@
     <fragment
         android:id="@+id/WorkoutDetail"
         android:name="com.example.fitnessbag.presentation.workout_detail.WorkoutDetailFragment"
-        android:label="@string/workouts_fragment_label" />
+        android:label="@string/workouts_fragment_label" >
+        <action
+            android:id="@+id/action_WorkoutDetail_to_doingWorkoutFragment"
+            app:destination="@id/doingWorkoutFragment" />
+    </fragment>
     <fragment
         android:id="@+id/createWorkoutFragment"
         android:name="com.example.fitnessbag.presentation.create_workout.CreateWorkoutFragment"
         android:label="create_workout_fragment"
         tools:layout="@layout/create_workout_fragment" />
+    <fragment
+        android:id="@+id/doingWorkoutFragment"
+        android:name="com.example.fitnessbag.presentation.doing_workout.DoingWorkoutFragment"
+        android:label="doing_workout_fragment"
+        tools:layout="@layout/doing_workout_fragment" />
 </navigation>

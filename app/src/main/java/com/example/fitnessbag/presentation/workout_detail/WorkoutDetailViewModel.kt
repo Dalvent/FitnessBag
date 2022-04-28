@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fitnessbag.data.models.ExerciseModel
 import com.example.fitnessbag.data.models.WorkoutDetailModel
 import com.example.fitnessbag.data.models.WorkoutInCatalogModel
 import com.example.fitnessbag.data.repositories.WorkoutDetailRepository
@@ -23,12 +24,16 @@ class WorkoutDetailViewModel(private val workoutDetailRepository: WorkoutDetailR
     private val _tags = MutableLiveData<List<String>>()
     val tags: LiveData<List<String>> = _tags
 
+    private val _exercise = MutableLiveData<List<ExerciseModel>>()
+    val exercise: LiveData<List<ExerciseModel>> = _exercise
+
     fun initialize(id: Int) {
         startLoading()
         val workoutModel = workoutDetailRepository.getWorkoutDetail(id)
         _name.value = workoutModel.name
         _description.value = workoutModel.description
         _tags.value = workoutModel.tags
+        _exercise.value = workoutModel.exercises
         stopLoading()
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.doing_workout.DoingWorkoutFragment">
+    
+    <fragment
+        android:id="@+id/doingWorkoutFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="androidx.navigation.fragment.NavHostFragment" />
+    
+    <ImageView
+        android:id="@+id/backImageView"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:scaleType="center"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:padding="8dp" />
+
+</FrameLayout>

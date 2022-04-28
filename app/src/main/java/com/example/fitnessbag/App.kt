@@ -5,6 +5,7 @@ import com.example.fitnessbag.data.repositories.FakeWorkoutDetailRepository
 import com.example.fitnessbag.data.repositories.FakeWorkoutInCatalogRepository
 import com.example.fitnessbag.data.repositories.WorkoutDetailRepository
 import com.example.fitnessbag.data.repositories.WorkoutInCatalogRepository
+import com.example.fitnessbag.presentation.doing_workout.DoingWorkoutViewModel
 import com.example.fitnessbag.presentation.workout_detail.WorkoutDetailViewModel
 import com.example.fitnessbag.presentation.workouts_catalog.WorkoutCatalogViewModel
 import org.koin.android.ext.koin.androidContext
@@ -20,6 +21,7 @@ class App() : Application() {
         single<WorkoutDetailRepository> { FakeWorkoutDetailRepository() }
         viewModel { WorkoutCatalogViewModel(get()) }
         viewModel { WorkoutDetailViewModel(get()) }
+        viewModel { DoingWorkoutViewModel(get()) }
     }
 
     override fun onCreate() {
