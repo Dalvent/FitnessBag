@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitnessbag.MainActivity
 import com.example.fitnessbag.R
@@ -47,10 +48,11 @@ class CreateWorkoutFragment : Fragment() {
         val layoutWhatExerciseAdd = LayoutWhatExerciseAddBinding.inflate(layoutInflater)
         bottomSheetDialog.setContentView(layoutWhatExerciseAdd.root)
         layoutWhatExerciseAdd.addExistedLinearLayout.setOnClickListener { 
-            
+
         }
         layoutWhatExerciseAdd.addNewLinearLayout.setOnClickListener {
-            
+            findNavController().navigate(CreateWorkoutFragmentDirections.actionCreateWorkoutFragmentToAddExerciseFragment())
+            bottomSheetDialog.hide()
         }
         bottomSheetDialog.show()
     }
