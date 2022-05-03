@@ -1,50 +1,46 @@
 package com.example.fitnessbag.presentation.doing_workout.rest
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.fragment.NavHostFragment
-import com.example.fitnessbag.R
-import com.example.fitnessbag.data.repositories.WorkoutDetailRepository
-import com.example.fitnessbag.databinding.FragmentDoingExerciseBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.fitnessbag.databinding.FragmentRestBinding
-import com.example.fitnessbag.presentation.BaseViewModel
 import com.example.fitnessbag.presentation.doing_workout.DoingWorkoutFragment
-import com.example.fitnessbag.presentation.doing_workout.DoingWorkoutState
+
 
 class RestFragment : Fragment() {
-
-    private var _binding: FragmentRestBinding? = null
-    private val binding get() = _binding!!
+    
+    companion object {
+        const val DOING_EXERCISE_SECONDS = "DOING_EXERCISE_SECONDS"
+    }
+    
+    private lateinit var binding: FragmentRestBinding
     
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentRestBinding.inflate(inflater, container, false)
+        binding = FragmentRestBinding.inflate(inflater, container, false)
+        val workoutNavigator = (requireParentFragment() as DoingWorkoutFragment).workoutNavigator
 
-        val parentViewModel = (requireParentFragment() as DoingWorkoutFragment).viewModel
-
-        binding.skipButton.setOnClickListener {
-            parentViewModel.updateState(DoingWorkoutState.Exercise)
-
+        val restSeconds = arguments?.getInt(DOING_EXERCISE_SECONDS)!!
+        val viewModel = ViewModelProvider(this, RestViewModelFactory(workoutNavigator, restSeconds)).get(RestViewModel::class.java)
+        viewModel.remainingTime.observe(viewLifecycleOwner) {
+            binding.timeTextView.text = it
         }
-
+        
+        binding.skipButton.setOnClickListener {
+            viewModel.skip()
+        }
+        
+        binding.addSecondsButton.setOnClickListener {
+            viewModel.addSeconds(10)
+        }
+        
         return binding.root
     }
 }
 
-class RestViewModel() : BaseViewModel() {
-    private val _doingWorkoutState = MutableLiveData<DoingWorkoutState>()
-    val doingWorkoutState : LiveData<DoingWorkoutState> = _doingWorkoutState
-
-    
-    
-    fun updateState(state: DoingWorkoutState) {
-        _doingWorkoutState.value = state
-    }
-}

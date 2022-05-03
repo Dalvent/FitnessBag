@@ -10,26 +10,21 @@ import com.example.fitnessbag.R
 import com.example.fitnessbag.data.models.WorkoutInCatalogModel
 import com.example.fitnessbag.databinding.ItemWorkoutInCatalotBinding
 import com.example.fitnessbag.presentation.TagsAdapter
-import com.example.fitnessbag.presentation.useForTags
+import com.example.fitnessbag.presentation.applyTagsStyle
 import com.example.fitnessbag.presentation.utils.loadImage
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxItemDecoration
 import com.google.android.flexbox.FlexboxLayoutManager
 
 
-class WorkoutsCatalogAdapter :
+class WorkoutsCatalogAdapter(private var itemClick: ((model: WorkoutInCatalogModel) -> Unit)) :
     RecyclerView.Adapter<WorkoutsCatalogAdapter.WorkoutInCatalogViewHolder>() {
 
     private var catalog: List<WorkoutInCatalogModel> = listOf()
-    private var itemClick: View.OnClickListener? = null
     
     fun updateItems(catalog: List<WorkoutInCatalogModel>) {
         this.catalog = catalog
         notifyDataSetChanged();
-    }
-    
-    fun setItemClickListener(itemClick: View.OnClickListener) {
-        this.itemClick = itemClick
     }
 
     override fun onCreateViewHolder(
@@ -38,10 +33,8 @@ class WorkoutsCatalogAdapter :
     ): WorkoutInCatalogViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = ItemWorkoutInCatalotBinding.inflate(inflater, parent, false)
-        itemClick?.let {  
-            view.root.setOnClickListener(it)
-        }
-        return WorkoutInCatalogViewHolder(view)
+        
+        return WorkoutInCatalogViewHolder(view, itemClick)
     }
 
     override fun onBindViewHolder(holder: WorkoutInCatalogViewHolder, position: Int) {
@@ -52,11 +45,14 @@ class WorkoutsCatalogAdapter :
         return catalog.size
     }
 
-    class WorkoutInCatalogViewHolder(val itemTagBinding: ItemWorkoutInCatalotBinding) :
+    class WorkoutInCatalogViewHolder(
+        private val itemTagBinding: ItemWorkoutInCatalotBinding, 
+        private val itemClick: ((model: WorkoutInCatalogModel) -> Unit)) :
         RecyclerView.ViewHolder(itemTagBinding.root) {
         
         init {
-            itemTagBinding.tagsRecyclerView.useForTags(itemTagBinding.root.context)
+            itemTagBinding.tagsRecyclerView.applyTagsStyle(itemTagBinding.root.context)
+            itemTagBinding.tagsRecyclerView.adapter = TagsAdapter()
         }
 
         fun setModel(model: WorkoutInCatalogModel) {
@@ -64,6 +60,9 @@ class WorkoutsCatalogAdapter :
             itemTagBinding.titleTextView.text = model.name
             itemTagBinding.descriptionTextView.text = model.description
             itemTagBinding.imageView.loadImage(model.image)
+            itemTagBinding.root.setOnClickListener {
+                itemClick.invoke(model)
+            }
 
             val tagsAdapter = itemTagBinding.tagsRecyclerView.adapter as TagsAdapter
             tagsAdapter.updateItems(model.tags)

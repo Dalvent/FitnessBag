@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitnessbag.R
 import com.example.fitnessbag.databinding.FragmentWorkoutsBinding
 import com.example.fitnessbag.presentation.navigateTo
+import com.example.fitnessbag.presentation.workout_detail.WorkoutDetailFragmentArgs
+import com.example.fitnessbag.presentation.workout_detail.WorkoutDetailFragmentDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WorkoutsCatalogFragment : Fragment() {
-
+    
     private val model: WorkoutCatalogViewModel by viewModel()
     
     private var _binding: FragmentWorkoutsBinding? = null
@@ -26,9 +28,9 @@ class WorkoutsCatalogFragment : Fragment() {
     ): View {
         _binding = FragmentWorkoutsBinding.inflate(inflater, container, false)
 
-        val workoutsCatalogAdapter = WorkoutsCatalogAdapter()
-        workoutsCatalogAdapter.setItemClickListener {
-            findNavController().navigate(R.id.action_workout_to_workout_detail)
+        val workoutsCatalogAdapter = WorkoutsCatalogAdapter {
+            val action = WorkoutsCatalogFragmentDirections.actionWorkoutsCatalogFragmentToWorkoutDetailFragment(it.id)
+            findNavController().navigate(action)
         }
         binding.recyclerView.adapter = workoutsCatalogAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -41,7 +43,8 @@ class WorkoutsCatalogFragment : Fragment() {
         }
         
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_StartFragment_to_createWorkoutFragment)
+            val action = WorkoutsCatalogFragmentDirections.actionWorkoutsCatalogFragmentToCreateWorkoutFragment()
+            findNavController().navigate(action)
         }
         
         return binding.root

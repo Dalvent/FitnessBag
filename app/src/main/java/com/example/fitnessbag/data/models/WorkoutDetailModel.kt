@@ -1,5 +1,9 @@
 package com.example.fitnessbag.data.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class WorkoutDetailModel(
     var id: Int,
     var name: String,
@@ -7,4 +11,4 @@ data class WorkoutDetailModel(
     var image: String,
     var tags: List<String>,
     var exercises: List<ExerciseModel>
-)
+) : Parcelable

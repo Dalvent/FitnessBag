@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,11 +15,13 @@ import com.example.fitnessbag.data.models.ExerciseExecutionConditionsType.*
 import com.example.fitnessbag.data.models.ExerciseModel
 import com.example.fitnessbag.databinding.FragmentWorkoutDetailBinding
 import com.example.fitnessbag.databinding.ItemWorkoutInWorkoutDetailBinding
-import com.example.fitnessbag.presentation.useForTags
+import com.example.fitnessbag.presentation.TagsAdapter
+import com.example.fitnessbag.presentation.applyTagsStyle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WorkoutDetailFragment : Fragment() {
-    private val model: WorkoutDetailViewModel by viewModel()
+    private val args: WorkoutDetailFragmentArgs by navArgs()
+    private val viewModel: WorkoutDetailViewModel by viewModel()
 
     private var _binding: FragmentWorkoutDetailBinding? = null
     private val binding get() = _binding!!
@@ -30,28 +32,33 @@ class WorkoutDetailFragment : Fragment() {
     ): View {
         _binding = FragmentWorkoutDetailBinding.inflate(inflater, container, false)
         
-        model.initialize(31)
-        val tagsAdapter = _binding!!.tagsRecyclerView.useForTags(requireContext())
+        viewModel.initialize(args.workoutId)
+        val tagsAdapter = TagsAdapter()
+        _binding!!.tagsRecyclerView.applyTagsStyle(requireContext())
+        _binding!!.tagsRecyclerView.adapter = tagsAdapter
+        
         
         val exerciseAdapter = ExerciseInWorkoutDetailAdapter()
         binding.exercisesRecyclerView.adapter = exerciseAdapter 
         binding.exercisesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.exercisesRecyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         
-        model.name.observe(viewLifecycleOwner) {
+        viewModel.name.observe(viewLifecycleOwner) {
             _binding!!.titleTextView.text = it
         }
-        model.description.observe(viewLifecycleOwner) {
+        viewModel.description.observe(viewLifecycleOwner) {
             _binding!!.descriptionTextView.text = it
         }
-        model.tags.observe(viewLifecycleOwner) {
+        viewModel.tags.observe(viewLifecycleOwner) {
             tagsAdapter.updateItems(it)
         }
-        model.exercise.observe(viewLifecycleOwner) {
+        viewModel.exercise.observe(viewLifecycleOwner) {
             exerciseAdapter.updateItems(it)
         }
-        binding.startButton.setOnClickListener { 
-            findNavController().navigate(R.id.action_WorkoutDetail_to_doingWorkoutFragment)
+        
+        binding.startButton.setOnClickListener {
+            val action = WorkoutDetailFragmentDirections.actionWorkoutDetailFragmentToDoingWorkoutFragment(viewModel.workoutModel)
+            findNavController().navigate(action)
         }
         
         return binding.root
@@ -105,7 +112,7 @@ fun ExerciseModel.toDoneToString() : String
 
 fun Int.toSecondsToDoneString() : String {
     val seconds = this % 60
-    val minutes = this - seconds
+    val minutes = (this - seconds) / 60
     return "${minutes.toTwoDigitFormat()}:${seconds.toTwoDigitFormat()}"
 }
 

@@ -3,29 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/StartFragment">
+    app:startDestination="@id/workoutsCatalogFragment">
 
     <fragment
-        android:id="@+id/StartFragment"
-        android:name="com.example.fitnessbag.presentation.workouts_catalog.WorkoutsCatalogFragment"
-        android:label="@string/workouts_fragment_label"
-        tools:layout="@layout/fragment_workouts">
-        <action
-            android:id="@+id/action_workout_to_workout_detail"
-            app:destination="@id/WorkoutDetail" />
-        <action
-            android:id="@+id/action_StartFragment_to_createWorkoutFragment"
-            app:destination="@id/createWorkoutFragment" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/WorkoutDetail"
-        android:name="com.example.fitnessbag.presentation.workout_detail.WorkoutDetailFragment"
-        android:label="@string/workouts_fragment_label" >
-        <action
-            android:id="@+id/action_WorkoutDetail_to_doingWorkoutFragment"
-            app:destination="@id/doingWorkoutFragment" />
+        android:id="@+id/doneWorkoutFragment"
+        android:name="com.example.fitnessbag.presentation.done_workout.DoneWorkoutFragment"
+        android:label="done_workout_fragment"
+        tools:layout="@layout/done_workout_fragment" >
+        <argument
+            android:name="workoutDetail"
+            app:argType="com.example.fitnessbag.data.models.WorkoutDetailModel" />
     </fragment>
     <fragment
         android:id="@+id/createWorkoutFragment"
@@ -36,5 +23,39 @@
         android:id="@+id/doingWorkoutFragment"
         android:name="com.example.fitnessbag.presentation.doing_workout.DoingWorkoutFragment"
         android:label="doing_workout_fragment"
-        tools:layout="@layout/doing_workout_fragment" />
+        tools:layout="@layout/doing_workout_fragment" >
+        <action
+            android:id="@+id/action_doingWorkoutFragment_to_doneWorkoutFragment"
+            app:destination="@id/doneWorkoutFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/workoutsCatalogFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="workoutDetail"
+            app:argType="com.example.fitnessbag.data.models.WorkoutDetailModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutsCatalogFragment"
+        android:name="com.example.fitnessbag.presentation.workouts_catalog.WorkoutsCatalogFragment"
+        android:label="fragment_workouts"
+        tools:layout="@layout/fragment_workouts" >
+        <action
+            android:id="@+id/action_workoutsCatalogFragment_to_workoutDetailFragment"
+            app:destination="@id/workoutDetailFragment" />
+        <action
+            android:id="@+id/action_workoutsCatalogFragment_to_createWorkoutFragment"
+            app:destination="@id/createWorkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutDetailFragment"
+        android:name="com.example.fitnessbag.presentation.workout_detail.WorkoutDetailFragment"
+        android:label="WorkoutDetailFragment" >
+        <action
+            android:id="@+id/action_workoutDetailFragment_to_doingWorkoutFragment"
+            app:destination="@id/doingWorkoutFragment" />
+        <argument
+            android:name="workoutId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 </navigation>

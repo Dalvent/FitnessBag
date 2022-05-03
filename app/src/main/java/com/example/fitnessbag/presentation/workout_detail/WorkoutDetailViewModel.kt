@@ -14,6 +14,8 @@ import kotlinx.coroutines.launch
 
 class WorkoutDetailViewModel(private val workoutDetailRepository: WorkoutDetailRepository
 ) : BaseViewModel() {
+
+    lateinit var workoutModel: WorkoutDetailModel
     
     private val _name = MutableLiveData<String>()
     val name: LiveData<String> = _name
@@ -29,7 +31,7 @@ class WorkoutDetailViewModel(private val workoutDetailRepository: WorkoutDetailR
 
     fun initialize(id: Int) {
         startLoading()
-        val workoutModel = workoutDetailRepository.getWorkoutDetail(id)
+        workoutModel = workoutDetailRepository.getWorkoutDetail(id)
         _name.value = workoutModel.name
         _description.value = workoutModel.description
         _tags.value = workoutModel.tags

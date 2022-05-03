@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitnessbag.databinding.ItemTagBinding
 
+
 class TagsAdapter : RecyclerView.Adapter<TagsAdapter.TagViewHolder>() {
 
     private var tags: List<String> = listOf()

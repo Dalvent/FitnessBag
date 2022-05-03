@@ -7,7 +7,6 @@
     tools:context=".presentation.doing_workout.rest.RestFragment">
 
     <TextView
-        android:id="@+id/restTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rest time!!!"

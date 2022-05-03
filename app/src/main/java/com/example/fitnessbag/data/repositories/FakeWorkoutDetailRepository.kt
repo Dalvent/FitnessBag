@@ -20,102 +20,32 @@ class FakeWorkoutDetailRepository : WorkoutDetailRepository {
             listOf(
                 ExerciseModel(
                     1,
-                    "Антоха",
+                    "Отжимания",
                     "DsfaF DFSAFADS",
-                    "https://phantom-marca.unidadeditorial.es/746e69f29df0fa7da1f9df1cffc2af10/crop/0x20/1499x861/resize/1320/f/jpg/assets/multimedia/imagenes/2022/01/12/16419960151339.jpg",
+                    "https://tn.fishki.net/20/upload/post/201406/05/1275198/ed81817cdd78884ad5b125a9c3cdf8ae.jpg",
                     ExerciseExecutionConditionsType.CompleteRepetition,
                     10,
                     0
                 ),
                 ExerciseModel(
                     2,
-                    "Антоха",
+                    "Прыжки",
                     "DsfaF DFSAFADS",
-                    "https://phantom-marca.unidadeditorial.es/746e69f29df0fa7da1f9df1cffc2af10/crop/0x20/1499x861/resize/1320/f/jpg/assets/multimedia/imagenes/2022/01/12/16419960151339.jpg",
-                    ExerciseExecutionConditionsType.CompleteRepetition,
-                    10,
-                    0
+                    "https://static6.depositphotos.com/1001951/625/i/600/depositphotos_6255367-stock-photo-handsome-man-jumping.jpg",
+                    ExerciseExecutionConditionsType.TimeIsUp,
+                    0,
+                    10
                 ),
                 ExerciseModel(
                     3,
-                    "Антоха",
+                    "Покушать бутер",
                     "DsfaF DFSAFADS",
-                    "https://phantom-marca.unidadeditorial.es/746e69f29df0fa7da1f9df1cffc2af10/crop/0x20/1499x861/resize/1320/f/jpg/assets/multimedia/imagenes/2022/01/12/16419960151339.jpg",
-                    ExerciseExecutionConditionsType.CompleteRepetition,
-                    10,
-                    0
-                ),
-                ExerciseModel(
-                    4,
-                    "Антоха",
-                    "DsfaF DFSAFADS",
-                    "https://phantom-marca.unidadeditorial.es/746e69f29df0fa7da1f9df1cffc2af10/crop/0x20/1499x861/resize/1320/f/jpg/assets/multimedia/imagenes/2022/01/12/16419960151339.jpg",
-                    ExerciseExecutionConditionsType.CompleteRepetition,
-                    10,
-                    0
-                ), ExerciseModel(
-                    5,
-                    "Антоха",
-                    "DsfaF DFSAFADS",
-                    "https://phantom-marca.unidadeditorial.es/746e69f29df0fa7da1f9df1cffc2af10/crop/0x20/1499x861/resize/1320/f/jpg/assets/multimedia/imagenes/2022/01/12/16419960151339.jpg",
-                    ExerciseExecutionConditionsType.CompleteRepetition,
-                    10,
-                    0
-                ),
-                ExerciseModel(
-                    6,
-                    "Антоха",
-                    "DsfaF DFSAFADS",
-                    "https://phantom-marca.unidadeditorial.es/746e69f29df0fa7da1f9df1cffc2af10/crop/0x20/1499x861/resize/1320/f/jpg/assets/multimedia/imagenes/2022/01/12/16419960151339.jpg",
-                    ExerciseExecutionConditionsType.CompleteRepetition,
-                    10,
-                    0
-                ),
-                ExerciseModel(
-                    7,
-                    "Антоха",
-                    "DsfaF DFSAFADS",
-                    "https://phantom-marca.unidadeditorial.es/746e69f29df0fa7da1f9df1cffc2af10/crop/0x20/1499x861/resize/1320/f/jpg/assets/multimedia/imagenes/2022/01/12/16419960151339.jpg",
-                    ExerciseExecutionConditionsType.CompleteRepetition,
-                    10,
-                    0
-                ),
-                ExerciseModel(
-                    8,
-                    "Антоха",
-                    "DsfaF DFSAFADS",
-                    "https://phantom-marca.unidadeditorial.es/746e69f29df0fa7da1f9df1cffc2af10/crop/0x20/1499x861/resize/1320/f/jpg/assets/multimedia/imagenes/2022/01/12/16419960151339.jpg",
-                    ExerciseExecutionConditionsType.CompleteRepetition,
-                    10,
-                    0
-                ),
-                ExerciseModel(
-                    9,
-                    "Антоха",
-                    "DsfaF DFSAFADS",
-                    "https://phantom-marca.unidadeditorial.es/746e69f29df0fa7da1f9df1cffc2af10/crop/0x20/1499x861/resize/1320/f/jpg/assets/multimedia/imagenes/2022/01/12/16419960151339.jpg",
-                    ExerciseExecutionConditionsType.CompleteRepetition,
-                    10,
-                    0
-                ),
-                ExerciseModel(
-                    10,
-                    "Антоха",
-                    "DsfaF DFSAFADS",
-                    "https://phantom-marca.unidadeditorial.es/746e69f29df0fa7da1f9df1cffc2af10/crop/0x20/1499x861/resize/1320/f/jpg/assets/multimedia/imagenes/2022/01/12/16419960151339.jpg",
+                    "https://primebeef.ru/images/cms/thumbs/a5b0aeaa3fa7d6e58d75710c18673bd7ec6d5f6d/img_3911_500_306_5_100.jpg",
                     ExerciseExecutionConditionsType.CompleteRepetition,
                     10,
                     0
                 )
             )
         )
-    }
-
-    override fun getExercise(workoutId: Int, exerciseNumber: Int) : ExerciseModel? {
-        val exercises = getWorkoutDetail(workoutId).exercises
-        if(exercises.size > exerciseNumber)
-            return exercises[exerciseNumber]
-        
-        return null
     }
 }
