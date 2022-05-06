@@ -8,13 +8,15 @@ import com.example.fitnessbag.databinding.ItemAddExerciseBinding
 import com.example.fitnessbag.databinding.ItemAddedExerciseBinding
 import com.example.fitnessbag.presentation.workout_detail.toDoneToString
 
+class ExerciseWrapperModel(val model: ExerciseModel)
+
 class AddExercisesAdapter(exercises: List<ExerciseModel>, val onAddClick: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val ADD_BUTTON_TYPE = 0
         const val EXERCISE_TYPE = 1
     }
     
-    private val exercises: MutableList<ExerciseModel> = ArrayList(exercises)
+    private val exercises: MutableList<ExerciseWrapperModel> = ArrayList(exercises.map { ExerciseWrapperModel(it) })
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -36,7 +38,7 @@ class AddExercisesAdapter(exercises: List<ExerciseModel>, val onAddClick: () -> 
     }
     
     fun addExercise(model: ExerciseModel) {
-        exercises.add(model)
+        exercises.add(ExerciseWrapperModel(model))
         notifyItemChanged(exercises.size - 1)
         notifyItemInserted(exercises.size)
     }
@@ -50,7 +52,7 @@ class AddExercisesAdapter(exercises: List<ExerciseModel>, val onAddClick: () -> 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ExerciseViewHolder) {
-            holder.setModel(exercises[position + 1])
+            holder.setModel(exercises[position - 1])
         }
     }
 
@@ -58,11 +60,11 @@ class AddExercisesAdapter(exercises: List<ExerciseModel>, val onAddClick: () -> 
         return exercises.size + 1
     }
     
-    class ExerciseViewHolder(val binding: ItemAddedExerciseBinding, val onRemoveClick: (model: ExerciseModel) -> Unit)  : RecyclerView.ViewHolder(binding.root) {
+    class ExerciseViewHolder(val binding: ItemAddedExerciseBinding, val onRemoveClick: (model: ExerciseWrapperModel) -> Unit)  : RecyclerView.ViewHolder(binding.root) {
         
-        fun setModel(model: ExerciseModel) {
-            binding.titleTextView.text = model.name
-            binding.countTextView.text = model.toDoneToString()
+        fun setModel(model: ExerciseWrapperModel) {
+            binding.titleTextView.text = model.model.name
+            binding.countTextView.text = model.model.toDoneToString()
             binding.removeButton.setOnClickListener {
                 onRemoveClick.invoke(model)
             }

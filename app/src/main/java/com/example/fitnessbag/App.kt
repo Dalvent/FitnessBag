@@ -1,10 +1,9 @@
 package com.example.fitnessbag
 
 import android.app.Application
-import com.example.fitnessbag.data.repositories.FakeWorkoutDetailRepository
-import com.example.fitnessbag.data.repositories.FakeWorkoutInCatalogRepository
-import com.example.fitnessbag.data.repositories.WorkoutDetailRepository
-import com.example.fitnessbag.data.repositories.WorkoutInCatalogRepository
+import com.example.fitnessbag.data.repositories.*
+import com.example.fitnessbag.presentation.add_existed_exercise.AddExistedExerciseViewModel
+import com.example.fitnessbag.presentation.create_exersice.CreateExerciseViewModel
 import com.example.fitnessbag.presentation.doing_workout.DoingWorkoutViewModel
 import com.example.fitnessbag.presentation.workout_detail.WorkoutDetailViewModel
 import com.example.fitnessbag.presentation.workouts_catalog.WorkoutCatalogViewModel
@@ -19,9 +18,12 @@ class App() : Application() {
     val module = module {
         single<WorkoutInCatalogRepository> { FakeWorkoutInCatalogRepository() }
         single<WorkoutDetailRepository> { FakeWorkoutDetailRepository() }
+        single<ExerciseRepository> { FakeExerciseRepository() }
         viewModel { WorkoutCatalogViewModel(get()) }
         viewModel { WorkoutDetailViewModel(get()) }
         viewModel { DoingWorkoutViewModel(get()) }
+        viewModel { AddExistedExerciseViewModel(get()) }
+        viewModel { CreateExerciseViewModel(get()) }
     }
 
     override fun onCreate() {

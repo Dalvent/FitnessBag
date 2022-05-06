@@ -10,7 +10,7 @@ import androidx.lifecycle.observe
 import com.example.fitnessbag.data.models.ExerciseModel
 import com.example.fitnessbag.databinding.FragmentDoingExerciseBinding
 import com.example.fitnessbag.presentation.doing_workout.DoingWorkoutFragment
-import com.example.fitnessbag.utils.loadImageUrl
+import com.example.fitnessbag.presentation.utils.loadImage
 
 class DoingExerciseFragment : Fragment() {
 
@@ -46,7 +46,7 @@ class DoingExerciseFragment : Fragment() {
         }
         
         viewModel.imageUrl.observe(viewLifecycleOwner) {
-            binding.exercisesImageView.loadImageUrl(it)
+            binding.exercisesImageView.loadImage(it)
         }
         
         binding.specailButton.setOnClickListener {

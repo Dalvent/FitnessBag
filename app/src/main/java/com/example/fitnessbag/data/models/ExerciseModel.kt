@@ -2,7 +2,7 @@ package com.example.fitnessbag.data.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ExerciseModel(

@@ -22,12 +22,15 @@
         <action
             android:id="@+id/action_createWorkoutFragment_to_addExerciseFragment"
             app:destination="@id/addExerciseFragment" />
+        <action
+            android:id="@+id/action_createWorkoutFragment_to_addExistedExerciseFragment"
+            app:destination="@id/addExistedExerciseFragment" />
     </fragment>
     <fragment
         android:id="@+id/addExerciseFragment"
-        android:name="com.example.fitnessbag.presentation.create_workout.AddExerciseFragment"
+        android:name="com.example.fitnessbag.presentation.create_exersice.CreateExerciseFragment"
         android:label="add_exercise_fragment"
-        tools:layout="@layout/add_exercise_fragment" />
+        tools:layout="@layout/create_exercise_fragment" />
     <fragment
         android:id="@+id/doingWorkoutFragment"
         android:name="com.example.fitnessbag.presentation.doing_workout.DoingWorkoutFragment"
@@ -67,4 +70,9 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
+    <fragment
+        android:id="@+id/addExistedExerciseFragment"
+        android:name="com.example.fitnessbag.presentation.add_existed_exercise.AddExistedExerciseFragment"
+        android:label="add_existed_exercise_fragment"
+        tools:layout="@layout/add_existed_exercise_fragment" />
 </navigation>
