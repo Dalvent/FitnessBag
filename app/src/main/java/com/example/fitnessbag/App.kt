@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.fitnessbag.data.repositories.*
 import com.example.fitnessbag.presentation.add_existed_exercise.AddExistedExerciseViewModel
 import com.example.fitnessbag.presentation.create_exersice.CreateExerciseViewModel
+import com.example.fitnessbag.presentation.create_workout.CreateWorkoutViewModel
 import com.example.fitnessbag.presentation.doing_workout.DoingWorkoutViewModel
 import com.example.fitnessbag.presentation.workout_detail.WorkoutDetailViewModel
 import com.example.fitnessbag.presentation.workouts_catalog.WorkoutCatalogViewModel
@@ -16,14 +17,14 @@ import org.koin.dsl.module
 
 class App() : Application() {
     val module = module {
-        single<WorkoutInCatalogRepository> { FakeWorkoutInCatalogRepository() }
-        single<WorkoutDetailRepository> { FakeWorkoutDetailRepository() }
+        single<WorkoutRepository> { FakeWorkoutRepository() }
         single<ExerciseRepository> { FakeExerciseRepository() }
         viewModel { WorkoutCatalogViewModel(get()) }
         viewModel { WorkoutDetailViewModel(get()) }
         viewModel { DoingWorkoutViewModel(get()) }
         viewModel { AddExistedExerciseViewModel(get()) }
         viewModel { CreateExerciseViewModel(get()) }
+        viewModel { CreateWorkoutViewModel(get()) }
     }
 
     override fun onCreate() {

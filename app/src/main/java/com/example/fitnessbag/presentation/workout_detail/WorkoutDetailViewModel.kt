@@ -2,17 +2,12 @@ package com.example.fitnessbag.presentation.workout_detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.fitnessbag.data.models.ExerciseModel
 import com.example.fitnessbag.data.models.WorkoutDetailModel
-import com.example.fitnessbag.data.models.WorkoutInCatalogModel
-import com.example.fitnessbag.data.repositories.WorkoutDetailRepository
-import com.example.fitnessbag.data.repositories.WorkoutInCatalogRepository
+import com.example.fitnessbag.data.repositories.WorkoutRepository
 import com.example.fitnessbag.presentation.BaseViewModel
-import kotlinx.coroutines.launch
 
-class WorkoutDetailViewModel(private val workoutDetailRepository: WorkoutDetailRepository
+class WorkoutDetailViewModel(private val workoutRepository: WorkoutRepository
 ) : BaseViewModel() {
 
     lateinit var workoutModel: WorkoutDetailModel
@@ -31,7 +26,7 @@ class WorkoutDetailViewModel(private val workoutDetailRepository: WorkoutDetailR
 
     fun initialize(id: Int) {
         startLoading()
-        workoutModel = workoutDetailRepository.getWorkoutDetail(id)
+        workoutModel = workoutRepository.getDetailed(id)
         _name.value = workoutModel.name
         _description.value = workoutModel.description
         _tags.value = workoutModel.tags

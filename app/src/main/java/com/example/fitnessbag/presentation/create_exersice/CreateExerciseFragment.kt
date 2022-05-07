@@ -1,23 +1,28 @@
 package com.example.fitnessbag.presentation.create_exersice
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.navigation.fragment.findNavController
 import com.example.fitnessbag.R
 import com.example.fitnessbag.data.models.ExerciseExecutionConditionsType
 import com.example.fitnessbag.databinding.CreateExerciseFragmentBinding
+import com.example.fitnessbag.presentation.create_workout.CreateWorkoutFragment
 import com.example.fitnessbag.utils.ValidationException
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.Exception
 
 
 class CreateExerciseFragment : Fragment() {
-
+    
     private var _binding: CreateExerciseFragmentBinding? = null
     private val binding get() = _binding!!
     
@@ -51,9 +56,21 @@ class CreateExerciseFragment : Fragment() {
         binding.exerciseTypeDropDown.addTextChangedListener {
             viewModel.setExerciseExecutionConditionsType(convertToConditionsType(it.toString()))
         }
+        binding.loadImageButton.setOnClickListener {
+            val intent = Intent()
+                .setType("*/*")
+                .setAction(Intent.ACTION_GET_CONTENT)
+
+            startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
+        }
         binding.addButton.setOnClickListener {
             try {
-                viewModel.save()
+                val model = viewModel.save()
+
+                val bundle = Bundle()
+                bundle.putParcelable(CreateWorkoutFragment.SELECTED_EXERCISE, model)
+                setFragmentResult(CreateWorkoutFragment.SELECTED_EXERCISE, bundle)
+                findNavController().navigateUp()
             }
             catch (ex: ValidationException) {
                 Toast.makeText(requireContext(), "Fill all fields!!!", Toast.LENGTH_SHORT).show()

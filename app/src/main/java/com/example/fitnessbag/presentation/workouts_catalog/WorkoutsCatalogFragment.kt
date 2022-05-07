@@ -50,6 +50,11 @@ class WorkoutsCatalogFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        model.update()
+        super.onStart()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

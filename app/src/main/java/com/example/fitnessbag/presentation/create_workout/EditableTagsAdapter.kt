@@ -9,7 +9,7 @@ import com.example.fitnessbag.databinding.ItemEditableTagBinding
 import com.example.fitnessbag.databinding.ItemRemovableTagBinding
 
 
-class EditableTagsAdapter(tags: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), 
+class EditableTagsAdapter(val tags: MutableList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), 
     IOnHideKeyboardListener {
     
     companion object {
@@ -20,7 +20,6 @@ class EditableTagsAdapter(tags: List<String>) : RecyclerView.Adapter<RecyclerVie
 
     private var recyclerView: RecyclerView? = null
     private var editableTagViewHolder: EditableTagViewHolder? = null
-    private val tags: MutableList<String> = ArrayList(tags)
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
