@@ -7,18 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.example.fitnessbag.R
-import com.example.fitnessbag.data.models.ExerciseExecutionConditionsType
+import com.example.fitnessbag.domain.models.ExerciseConditionsType
 import com.example.fitnessbag.databinding.CreateExerciseFragmentBinding
 import com.example.fitnessbag.presentation.create_workout.CreateWorkoutFragment
 import com.example.fitnessbag.utils.ValidationException
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.Exception
 
 
 class CreateExerciseFragment : Fragment() {
@@ -89,7 +87,7 @@ class CreateExerciseFragment : Fragment() {
             
             binding.descriptionTextInputEditText.setText(it)
         }
-        viewModel.exerciseExecutionConditionsType.observe(viewLifecycleOwner) {
+        viewModel.exerciseConditionsType.observe(viewLifecycleOwner) {
             val exerciseTypes = resources.getStringArray(R.array.exercise_types_dropdown)
             val itString = exerciseTypes[toInt(it)]
             
@@ -100,11 +98,11 @@ class CreateExerciseFragment : Fragment() {
             }
 
             when(it) {
-                ExerciseExecutionConditionsType.TimeIsUp -> {
+                ExerciseConditionsType.TimeIsUp -> {
                     binding.secondsTextInputLayout.visibility = View.VISIBLE
                     binding.countTextInputLayout.visibility = View.GONE
                 }
-                ExerciseExecutionConditionsType.CompleteRepetition -> {
+                ExerciseConditionsType.CompleteRepetition -> {
                     binding.secondsTextInputLayout.visibility = View.GONE
                     binding.countTextInputLayout.visibility = View.VISIBLE
                 }
@@ -132,18 +130,18 @@ class CreateExerciseFragment : Fragment() {
         return binding.root
     }
     
-    private fun convertToConditionsType(it: String): ExerciseExecutionConditionsType {
+    private fun convertToConditionsType(it: String): ExerciseConditionsType {
         return when(it) {
-            "By time" -> ExerciseExecutionConditionsType.TimeIsUp
-            "By repetition" -> ExerciseExecutionConditionsType.CompleteRepetition
+            "By time" -> ExerciseConditionsType.TimeIsUp
+            "By repetition" -> ExerciseConditionsType.CompleteRepetition
             else -> throw IllegalArgumentException()
         }
     }
     
-    private fun toInt(it: ExerciseExecutionConditionsType): Int {
+    private fun toInt(it: ExerciseConditionsType): Int {
         return when(it) {
-            ExerciseExecutionConditionsType.TimeIsUp -> 0
-            ExerciseExecutionConditionsType.CompleteRepetition -> 1
+            ExerciseConditionsType.TimeIsUp -> 0
+            ExerciseConditionsType.CompleteRepetition -> 1
         }
     }
 }

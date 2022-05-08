@@ -1,14 +1,15 @@
 package com.example.fitnessbag.presentation.doing_workout.doing_exerise
 
 import androidx.lifecycle.viewModelScope
-import com.example.fitnessbag.data.models.ExerciseModel
+import com.example.fitnessbag.domain.models.Exercise
+import com.example.fitnessbag.domain.models.TimeExercise
 import com.example.fitnessbag.presentation.doing_workout.WorkoutNavigator
 import com.example.fitnessbag.presentation.workout_detail.toSecondsToDoneString
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class TimeDoingExerciseViewModel(private val workoutNavigator: WorkoutNavigator, private val exerciseModel: ExerciseModel
+class TimeDoingExerciseViewModel(private val workoutNavigator: WorkoutNavigator, private val exercise: TimeExercise
 ) : DoingExerciseViewModel() {
     
     private var timerJob: Job? = null
@@ -17,10 +18,10 @@ class TimeDoingExerciseViewModel(private val workoutNavigator: WorkoutNavigator,
     private fun isTimerStart() = timerJob != null
     
     init {
-        remainingTime = exerciseModel.secondsToDone
+        remainingTime = exercise.secondsToDone
         _statusToDone.value = remainingTime.toSecondsToDoneString()
-        _name.value = exerciseModel.name
-        _imageUrl.value = exerciseModel.image
+        _name.value = exercise.name
+        _imageUrl.value = exercise.image
 
         startTimer()
     }

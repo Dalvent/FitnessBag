@@ -12,7 +12,7 @@
         tools:layout="@layout/done_workout_fragment" >
         <argument
             android:name="workoutDetail"
-            app:argType="com.example.fitnessbag.data.models.WorkoutDetailModel" />
+            app:argType="com.example.fitnessbag.domain.models.WorkoutDetail" />
     </fragment>
     <fragment
         android:id="@+id/createWorkoutFragment"
@@ -44,7 +44,9 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="workoutDetail"
-            app:argType="com.example.fitnessbag.data.models.WorkoutDetailModel" />
+            app:argType="com.example.fitnessbag.domain.models.WorkoutDetail" /><![CDATA[
+        app:argType="com.example.fitnessbag.domain.models.WorkoutDetail" />
+    ]]>
     </fragment>
     <fragment
         android:id="@+id/workoutsCatalogFragment"
@@ -67,8 +69,7 @@
             app:destination="@id/doingWorkoutFragment" />
         <argument
             android:name="workoutId"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/addExistedExerciseFragment"

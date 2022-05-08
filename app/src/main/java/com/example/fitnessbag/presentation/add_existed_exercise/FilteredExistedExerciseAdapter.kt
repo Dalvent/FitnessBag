@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fitnessbag.data.models.ExerciseModel
+import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.databinding.ItemImageExerciseBinding
 import com.example.fitnessbag.presentation.utils.loadImage
 import com.example.fitnessbag.presentation.workout_detail.toDoneToString
@@ -13,10 +13,10 @@ import com.example.fitnessbag.utils.removeWithAfter
 import java.util.*
 import kotlin.collections.ArrayList
 
-class FilteredExistedExerciseAdapter(val exercises: List<ExerciseModel>, private val onClick: (item: ExerciseModel) -> Unit) :
+class FilteredExistedExerciseAdapter(val exercises: List<Exercise>, private val onClick: (item: Exercise) -> Unit) :
     RecyclerView.Adapter<FilteredExistedExerciseAdapter.ExerciseViewHolder>() {
 
-    var filteredExercises: MutableList<ExerciseModel> = ArrayList(exercises)
+    var filteredExercises: MutableList<Exercise> = ArrayList(exercises)
     var filterString = ""
 
     @SuppressLint("NotifyDataSetChanged")
@@ -24,7 +24,7 @@ class FilteredExistedExerciseAdapter(val exercises: List<ExerciseModel>, private
         if (this.filterString != "" && startWithLower(filterString, this.filterString)) {
             filteredExercises.removeWithAfter({
                 !startWithLower(it.name, filterString)
-            }) { exerciseModel: ExerciseModel, i: Int -> notifyItemRemoved(i) }
+            }) { exercise: Exercise, i: Int -> notifyItemRemoved(i) }
 
             this.filterString = filterString
             
@@ -56,10 +56,10 @@ class FilteredExistedExerciseAdapter(val exercises: List<ExerciseModel>, private
         return filteredExercises.size
     }
 
-    class ExerciseViewHolder(val binding: ItemImageExerciseBinding, onClick: (item: ExerciseModel) -> Unit) :
+    class ExerciseViewHolder(val binding: ItemImageExerciseBinding, onClick: (item: Exercise) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private var model: ExerciseModel? = null
+        private var model: Exercise? = null
 
         init {
             binding.root.setOnClickListener { 
@@ -67,7 +67,7 @@ class FilteredExistedExerciseAdapter(val exercises: List<ExerciseModel>, private
             }
         }
         
-        fun setModel(model: ExerciseModel) {
+        fun setModel(model: Exercise) {
             this.model = model
             binding.exerciseImageView.loadImage(model.image)
             binding.descriptionTextView.text = model.description

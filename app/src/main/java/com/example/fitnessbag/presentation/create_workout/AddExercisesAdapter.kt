@@ -3,12 +3,13 @@ package com.example.fitnessbag.presentation.create_workout
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fitnessbag.data.models.ExerciseModel
+import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.databinding.ItemAddExerciseBinding
 import com.example.fitnessbag.databinding.ItemAddedExerciseBinding
+import com.example.fitnessbag.domain.models.copy
 import com.example.fitnessbag.presentation.workout_detail.toDoneToString
 
-class AddExercisesAdapter(val exercises: MutableList<ExerciseModel>, val onAddClick: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AddExercisesAdapter(val exercises: MutableList<Exercise>, val onAddClick: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val ADD_BUTTON_TYPE = 0
         const val EXERCISE_TYPE = 1
@@ -33,7 +34,7 @@ class AddExercisesAdapter(val exercises: MutableList<ExerciseModel>, val onAddCl
         }
     }
     
-    fun addExercise(model: ExerciseModel) {
+    fun addExercise(model: Exercise) {
         exercises.add(model.copy())
         notifyItemChanged(exercises.size - 1)
         notifyItemInserted(exercises.size)
@@ -56,8 +57,8 @@ class AddExercisesAdapter(val exercises: MutableList<ExerciseModel>, val onAddCl
         return exercises.size + 1
     }
     
-    class ExerciseViewHolder(val binding: ItemAddedExerciseBinding, val onRemoveClick: (model: ExerciseModel) -> Unit)  : RecyclerView.ViewHolder(binding.root) {
-        fun setModel(model: ExerciseModel) {
+    class ExerciseViewHolder(val binding: ItemAddedExerciseBinding, val onRemoveClick: (model: Exercise) -> Unit)  : RecyclerView.ViewHolder(binding.root) {
+        fun setModel(model: Exercise) {
             binding.titleTextView.text = model.name
             binding.countTextView.text = model.toDoneToString()
             binding.removeButton.setOnClickListener {

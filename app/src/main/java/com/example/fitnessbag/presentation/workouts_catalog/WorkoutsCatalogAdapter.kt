@@ -1,28 +1,21 @@
 package com.example.fitnessbag.presentation.workouts_catalog
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fitnessbag.R
-import com.example.fitnessbag.data.models.WorkoutInCatalogModel
 import com.example.fitnessbag.databinding.ItemWorkoutInCatalotBinding
+import com.example.fitnessbag.domain.models.Workout
 import com.example.fitnessbag.presentation.TagsAdapter
 import com.example.fitnessbag.presentation.applyTagsStyle
 import com.example.fitnessbag.presentation.utils.loadImage
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxItemDecoration
-import com.google.android.flexbox.FlexboxLayoutManager
 
 
-class WorkoutsCatalogAdapter(private var itemClick: ((model: WorkoutInCatalogModel) -> Unit)) :
+class WorkoutsCatalogAdapter(private var itemClick: ((model: Workout) -> Unit)) :
     RecyclerView.Adapter<WorkoutsCatalogAdapter.WorkoutInCatalogViewHolder>() {
 
-    private var catalog: List<WorkoutInCatalogModel> = listOf()
+    private var catalog: List<Workout> = listOf()
     
-    fun updateItems(catalog: List<WorkoutInCatalogModel>) {
+    fun updateItems(catalog: List<Workout>) {
         this.catalog = catalog
         notifyDataSetChanged();
     }
@@ -47,7 +40,7 @@ class WorkoutsCatalogAdapter(private var itemClick: ((model: WorkoutInCatalogMod
 
     class WorkoutInCatalogViewHolder(
         private val itemTagBinding: ItemWorkoutInCatalotBinding, 
-        private val itemClick: ((model: WorkoutInCatalogModel) -> Unit)) :
+        private val itemClick: ((model: Workout) -> Unit)) :
         RecyclerView.ViewHolder(itemTagBinding.root) {
         
         init {
@@ -55,8 +48,7 @@ class WorkoutsCatalogAdapter(private var itemClick: ((model: WorkoutInCatalogMod
             itemTagBinding.tagsRecyclerView.adapter = TagsAdapter()
         }
 
-        fun setModel(model: WorkoutInCatalogModel) {
-            
+        fun setModel(model: Workout) {
             itemTagBinding.titleTextView.text = model.name
             itemTagBinding.descriptionTextView.text = model.description
             itemTagBinding.imageView.loadImage(model.image)

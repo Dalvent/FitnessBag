@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import com.example.fitnessbag.data.models.ExerciseModel
+import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.databinding.FragmentDoingExerciseBinding
 import com.example.fitnessbag.presentation.doing_workout.DoingWorkoutFragment
 import com.example.fitnessbag.presentation.utils.loadImage
@@ -28,7 +28,7 @@ class DoingExerciseFragment : Fragment() {
         
         _binding = FragmentDoingExerciseBinding.inflate(inflater, container, false)
         val workoutNavigator = (requireParentFragment() as DoingWorkoutFragment).workoutNavigator
-        val exerciseModel = arguments?.getParcelable<ExerciseModel>(DOING_EXERCISE_MODEL)!!
+        val exerciseModel = arguments?.getParcelable<Exercise>(DOING_EXERCISE_MODEL)!!
 
         val viewModel = ViewModelProvider(this, DoingExerciseViewModelFactory(workoutNavigator, exerciseModel)).get(
             DoingExerciseViewModel::class.java)

@@ -10,11 +10,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fitnessbag.R
-import com.example.fitnessbag.data.models.ExerciseExecutionConditionsType.*
-import com.example.fitnessbag.data.models.ExerciseModel
+import com.example.fitnessbag.domain.models.ExerciseConditionsType.*
+import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.databinding.FragmentWorkoutDetailBinding
 import com.example.fitnessbag.databinding.ItemWorkoutInWorkoutDetailBinding
+import com.example.fitnessbag.domain.models.RepeatExercise
+import com.example.fitnessbag.domain.models.TimeExercise
 import com.example.fitnessbag.presentation.TagsAdapter
 import com.example.fitnessbag.presentation.applyTagsStyle
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -72,9 +73,9 @@ class WorkoutDetailFragment : Fragment() {
 
 class ExerciseInWorkoutDetailAdapter :  RecyclerView.Adapter<ExerciseInWorkoutDetailAdapter.ExerciseInWorkoutDetailViewHolder>() {
 
-    private var exercises: List<ExerciseModel> = listOf()
+    private var exercises: List<Exercise> = listOf()
 
-    fun updateItems(exercises: List<ExerciseModel>) {
+    fun updateItems(exercises: List<Exercise>) {
         this.exercises = exercises
         this.notifyItemRangeChanged(0, exercises.size)
     }
@@ -101,12 +102,12 @@ class ExerciseInWorkoutDetailAdapter :  RecyclerView.Adapter<ExerciseInWorkoutDe
     }
 }
 
-fun ExerciseModel.toDoneToString() : String
+fun Exercise.toDoneToString() : String
 {
-    return when(this.executionConditionsType)
+    return when(this)
     {
-        TimeIsUp -> this.secondsToDone.toSecondsToDoneString()
-        CompleteRepetition -> "x${this.repeatTimes}"
+        is RepeatExercise -> "x${this.repeatTimes}"
+        is TimeExercise -> this.secondsToDone.toSecondsToDoneString()
     } 
 }
 

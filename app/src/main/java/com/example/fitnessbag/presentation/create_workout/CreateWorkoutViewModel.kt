@@ -3,9 +3,9 @@ package com.example.fitnessbag.presentation.create_workout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.fitnessbag.data.models.ExerciseModel
-import com.example.fitnessbag.data.models.WorkoutDetailModel
-import com.example.fitnessbag.data.repositories.WorkoutRepository
+import com.example.fitnessbag.domain.models.Exercise
+import com.example.fitnessbag.domain.models.Workout
+import com.example.fitnessbag.domain.repositories.workout.WorkoutRepository
 
 class CreateWorkoutViewModel(val workoutRepository: WorkoutRepository) : ViewModel() {
     var _name = MutableLiveData<String>("")
@@ -23,20 +23,16 @@ class CreateWorkoutViewModel(val workoutRepository: WorkoutRepository) : ViewMod
     var _tags = MutableLiveData<MutableList<String>>(mutableListOf())
     val tags: LiveData<MutableList<String>> = _tags
 
-    var _exercises = MutableLiveData<MutableList<ExerciseModel>>(mutableListOf())
-    val exercises: LiveData<MutableList<ExerciseModel>> = _exercises
+    var _exercises = MutableLiveData<MutableList<Exercise>>(mutableListOf())
+    val exercises: LiveData<MutableList<Exercise>> = _exercises
     
-    fun save(): WorkoutDetailModel {
-        val model = WorkoutDetailModel(
-            0,
+    fun save(): Workout {
+        return workoutRepository.createNew(
             _name.value!!,
             _description.value!!,
             "",
             _tags.value!!,
             _exercises.value!!
         )
-        workoutRepository.add(model)
-        
-        return model
     }
 }

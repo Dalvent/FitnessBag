@@ -8,11 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fitnessbag.R
 import com.example.fitnessbag.databinding.FragmentWorkoutsBinding
-import com.example.fitnessbag.presentation.navigateTo
-import com.example.fitnessbag.presentation.workout_detail.WorkoutDetailFragmentArgs
-import com.example.fitnessbag.presentation.workout_detail.WorkoutDetailFragmentDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WorkoutsCatalogFragment : Fragment() {
@@ -29,7 +25,7 @@ class WorkoutsCatalogFragment : Fragment() {
         _binding = FragmentWorkoutsBinding.inflate(inflater, container, false)
 
         val workoutsCatalogAdapter = WorkoutsCatalogAdapter {
-            val action = WorkoutsCatalogFragmentDirections.actionWorkoutsCatalogFragmentToWorkoutDetailFragment(it.id)
+            val action = WorkoutsCatalogFragmentDirections.actionWorkoutsCatalogFragmentToWorkoutDetailFragment(it.id!!)
             findNavController().navigate(action)
         }
         binding.recyclerView.adapter = workoutsCatalogAdapter

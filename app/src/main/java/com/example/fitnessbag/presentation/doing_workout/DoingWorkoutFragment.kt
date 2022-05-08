@@ -5,15 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowId
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.fitnessbag.R
-import com.example.fitnessbag.data.models.WorkoutDetailModel
 import com.example.fitnessbag.databinding.DoingWorkoutFragmentBinding
 import com.example.fitnessbag.presentation.doing_workout.doing_exerise.DoingExerciseFragment
 import com.example.fitnessbag.presentation.doing_workout.rest.RestFragment

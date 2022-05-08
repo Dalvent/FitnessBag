@@ -7,16 +7,12 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fitnessbag.MainActivity
-import com.example.fitnessbag.data.models.ExerciseModel
 import com.example.fitnessbag.databinding.CreateWorkoutFragmentBinding
 import com.example.fitnessbag.databinding.LayoutWhatExerciseAddBinding
 import com.example.fitnessbag.presentation.applyTagsStyle
-import com.example.fitnessbag.presentation.create_exersice.CreateExerciseFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
