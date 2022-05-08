@@ -13,6 +13,7 @@ import com.example.fitnessbag.MainActivity
 import com.example.fitnessbag.databinding.CreateWorkoutFragmentBinding
 import com.example.fitnessbag.databinding.LayoutWhatExerciseAddBinding
 import com.example.fitnessbag.presentation.applyTagsStyle
+import com.example.fitnessbag.presentation.utils.loadImage
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -60,6 +61,12 @@ class CreateWorkoutFragment : Fragment() {
             
             findNavController().navigateUp()
         }
+
+        binding.loadImageButton.setOnClickListener {
+            viewModel.imagePickerService.pickImage { uri ->
+                binding.exerciseImageView.loadImage(uri.toString())
+            }
+        }
         
         viewModel._name.observe(viewLifecycleOwner) {
             if((binding.nameTextInputEditText.text?.toString()?.equals(it.toString())) == true)
@@ -87,6 +94,8 @@ class CreateWorkoutFragment : Fragment() {
             }
             binding.exercisesRecyclerView.adapter = addExercisesAdapter
         }
+
+
         
         return binding.root
     }

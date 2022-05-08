@@ -15,6 +15,7 @@ import com.example.fitnessbag.R
 import com.example.fitnessbag.domain.models.ExerciseConditionsType
 import com.example.fitnessbag.databinding.CreateExerciseFragmentBinding
 import com.example.fitnessbag.presentation.create_workout.CreateWorkoutFragment
+import com.example.fitnessbag.presentation.utils.loadImage
 import com.example.fitnessbag.utils.ValidationException
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -55,11 +56,9 @@ class CreateExerciseFragment : Fragment() {
             viewModel.setExerciseExecutionConditionsType(convertToConditionsType(it.toString()))
         }
         binding.loadImageButton.setOnClickListener {
-            val intent = Intent()
-                .setType("*/*")
-                .setAction(Intent.ACTION_GET_CONTENT)
-
-            startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
+            viewModel.imagePickerService.pickImage { uri ->
+                binding.exerciseImageView.loadImage(uri.toString())
+            }
         }
         binding.addButton.setOnClickListener {
             try {

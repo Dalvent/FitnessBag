@@ -6,7 +6,8 @@ import com.example.fitnessbag.data.FitnessBagDatabase
 import com.example.fitnessbag.data.dao.ExerciseDao
 import com.example.fitnessbag.data.dao.TagsDao
 import com.example.fitnessbag.data.dao.WorkoutDao
-import com.example.fitnessbag.domain.repositories.*
+import com.example.fitnessbag.domain.DhavalImagePickerService
+import com.example.fitnessbag.domain.ImagePickerService
 import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepository
 import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepositoryImpl
 import com.example.fitnessbag.domain.repositories.workout.WorkoutRepository
@@ -25,7 +26,7 @@ import org.koin.core.logger.Level
 import org.koin.dsl.module
 
 class App() : Application() {
-    
+
     override fun onCreate() {
         super.onCreate()
 
@@ -39,16 +40,17 @@ class App() : Application() {
             single<ExerciseDao> { database.getExerciseDao() }
             single<TagsDao> { database.getTagsDao() }
             single<WorkoutDao> { database.getWorkoutDao() }
-            
+            single<ImagePickerService> { DhavalImagePickerService() }
             single<ExerciseRepository> { ExerciseRepositoryImpl(get()) }
             single<WorkoutRepository> { WorkoutRepositoryImpl(get(), get(), get()) }
-            
+
             viewModel { WorkoutCatalogViewModel(get()) }
             viewModel { WorkoutDetailViewModel(get()) }
             viewModel { DoingWorkoutViewModel(get()) }
             viewModel { AddExistedExerciseViewModel(get()) }
-            viewModel { CreateExerciseViewModel(get()) }
-            viewModel { CreateWorkoutViewModel(get()) }
+            viewModel { CreateExerciseViewModel(get(), get()) }
+            viewModel { CreateWorkoutViewModel(get(), get()) }
+            viewModel { MainActivityViewModel(get()) }
         }
 
         startKoin {

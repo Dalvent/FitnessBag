@@ -1,13 +1,14 @@
 package com.example.fitnessbag.presentation.create_exersice
 
 import androidx.lifecycle.MutableLiveData
+import com.example.fitnessbag.domain.ImagePickerService
 import com.example.fitnessbag.domain.models.ExerciseConditionsType
 import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepository
 import com.example.fitnessbag.presentation.BaseViewModel
 import com.example.fitnessbag.utils.ValidationException
 
-class CreateExerciseViewModel(private val exerciseRepository: ExerciseRepository) :
+class CreateExerciseViewModel(private val exerciseRepository: ExerciseRepository, val imagePickerService: ImagePickerService) :
     BaseViewModel() {
     private val _name = MutableLiveData<String>()
     val name: MutableLiveData<String> = _name
