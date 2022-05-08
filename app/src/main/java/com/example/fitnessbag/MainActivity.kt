@@ -1,19 +1,30 @@
 package com.example.fitnessbag
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.NavController
 import com.example.fitnessbag.databinding.ActivityMainBinding
+import com.github.dhaval2404.imagepicker.ImagePicker
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        lateinit var activity: WeakReference<Activity>
+    }
+
+    private val viewModel: MainActivityViewModel by viewModel()
 
     private var isShowKeyboard = false
     private var navController: NavController? = null
     private lateinit var binding: ActivityMainBinding
-    
 
     private var _onHideKeyboardListeners = ArrayList<IOnHideKeyboardListener>()
 
@@ -27,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activity = WeakReference(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -59,8 +71,18 @@ class MainActivity : AppCompatActivity() {
         return navController!!.navigateUp()
                 || super.onSupportNavigateUp()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            val uri = data?.data!!
+            viewModel.imagePickerService.invokeResult(uri)
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_LONG).show()
+        }
+    }
 }
 interface IOnHideKeyboardListener {
     fun keyboardHide()
 }
-    

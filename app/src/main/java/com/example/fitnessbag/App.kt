@@ -24,7 +24,7 @@ import org.koin.core.logger.Level
 import org.koin.dsl.module
 
 class App() : Application() {
-    
+
     override fun onCreate() {
         super.onCreate()
 
@@ -37,16 +37,17 @@ class App() : Application() {
         val module = module {
             single<ExerciseDao> { database.getExerciseDao() }
             single<WorkoutDao> { database.getWorkoutDao() }
-            
+
             single<ExerciseRepository> { ExerciseRepositoryImpl(get()) }
             single<WorkoutRepository> { WorkoutRepositoryImpl(get(), get()) }
-            
+
             viewModel { WorkoutCatalogViewModel(get()) }
             viewModel { WorkoutDetailViewModel(get()) }
             viewModel { DoingWorkoutViewModel(get()) }
             viewModel { AddExistedExerciseViewModel(get()) }
             viewModel { CreateExerciseViewModel(get()) }
             viewModel { CreateWorkoutViewModel(get()) }
+            viewModel { MainActivityViewModel(get()) }
         }
 
         startKoin {
