@@ -4,21 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fitnessbag.domain.models.ExerciseConditionsType.*
-import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.databinding.FragmentWorkoutDetailBinding
 import com.example.fitnessbag.databinding.ItemWorkoutInWorkoutDetailBinding
+import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.domain.models.RepeatExercise
 import com.example.fitnessbag.domain.models.TimeExercise
 import com.example.fitnessbag.presentation.TagsAdapter
 import com.example.fitnessbag.presentation.applyTagsStyle
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class WorkoutDetailFragment : Fragment() {
     private val args: WorkoutDetailFragmentArgs by navArgs()
@@ -46,6 +47,8 @@ class WorkoutDetailFragment : Fragment() {
         
         viewModel.name.observe(viewLifecycleOwner) {
             _binding!!.titleTextView.text = it
+
+            (activity as AppCompatActivity?)!!.supportActionBar!!.title = it
         }
         viewModel.description.observe(viewLifecycleOwner) {
             _binding!!.descriptionTextView.text = it

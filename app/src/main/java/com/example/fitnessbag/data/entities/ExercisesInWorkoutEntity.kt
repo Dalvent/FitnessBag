@@ -18,13 +18,13 @@ import com.example.fitnesbag.data.model.WorkoutEntity
     ForeignKey(
         entity = ExerciseEntity::class,
         parentColumns = ["id"],
-        childColumns = ["exerciseId"],
-        onDelete = CASCADE
+        childColumns = ["exerciseId"]
     ),
     ForeignKey(
         entity = WorkoutEntity::class,
         parentColumns = ["id"],
-        childColumns = ["workoutId"]
+        childColumns = ["workoutId"],
+        onDelete = CASCADE
     )
 ))
 class ExercisesInWorkoutEntity(

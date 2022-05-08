@@ -10,4 +10,5 @@ data class WorkoutEntity(
         var name: String,
         var description: String,
         var image: String,
+        var tags: String
 )

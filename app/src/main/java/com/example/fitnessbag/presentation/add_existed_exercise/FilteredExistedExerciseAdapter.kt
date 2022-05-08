@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.databinding.ItemImageExerciseBinding
+import com.example.fitnessbag.domain.startWithLower
 import com.example.fitnessbag.presentation.utils.loadImage
 import com.example.fitnessbag.presentation.workout_detail.toDoneToString
 import com.example.fitnessbag.presentation.workout_detail.toSecondsToDoneString
@@ -21,9 +22,9 @@ class FilteredExistedExerciseAdapter(val exercises: List<Exercise>, private val 
 
     @SuppressLint("NotifyDataSetChanged")
     fun setTextFilter(filterString: String) {
-        if (this.filterString != "" && startWithLower(filterString, this.filterString)) {
+        if (this.filterString != "" || filterString.startWithLower(this.filterString)) {
             filteredExercises.removeWithAfter({
-                !startWithLower(it.name, filterString)
+                !it.name.startWithLower(filterString)
             }) { exercise: Exercise, i: Int -> notifyItemRemoved(i) }
 
             this.filterString = filterString
@@ -32,16 +33,12 @@ class FilteredExistedExerciseAdapter(val exercises: List<Exercise>, private val 
         }
         
         filteredExercises = ArrayList(exercises.filter {
-            startWithLower(it.name, filterString)
+            it.name.startWithLower(filterString)
         })
 
         this.filterString = filterString
         notifyDataSetChanged()
     }
-
-    private fun startWithLower(it: String, arg: String) =
-        it.lowercase(Locale.getDefault())
-            .startsWith(arg.lowercase(Locale.getDefault()))
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
         val inflater = LayoutInflater.from(parent.context)

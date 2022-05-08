@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.room.Room
 import com.example.fitnessbag.data.FitnessBagDatabase
 import com.example.fitnessbag.data.dao.ExerciseDao
-import com.example.fitnessbag.data.dao.TagsDao
 import com.example.fitnessbag.data.dao.WorkoutDao
 import com.example.fitnessbag.domain.repositories.*
 import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepository
@@ -37,11 +36,10 @@ class App() : Application() {
 
         val module = module {
             single<ExerciseDao> { database.getExerciseDao() }
-            single<TagsDao> { database.getTagsDao() }
             single<WorkoutDao> { database.getWorkoutDao() }
             
             single<ExerciseRepository> { ExerciseRepositoryImpl(get()) }
-            single<WorkoutRepository> { WorkoutRepositoryImpl(get(), get(), get()) }
+            single<WorkoutRepository> { WorkoutRepositoryImpl(get(), get()) }
             
             viewModel { WorkoutCatalogViewModel(get()) }
             viewModel { WorkoutDetailViewModel(get()) }

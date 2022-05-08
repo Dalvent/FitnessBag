@@ -8,5 +8,6 @@ interface WorkoutRepository {
     fun getDetailed(id: Long): WorkoutDetail
     fun getForCatalog(): List<Workout>
     fun createNew(name: String, description: String, image: String, tags: List<String>, exercises: List<Exercise>): WorkoutDetail
+    fun delete(workout: Workout)
 }
 
