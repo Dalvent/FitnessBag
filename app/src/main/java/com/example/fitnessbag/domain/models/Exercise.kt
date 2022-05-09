@@ -2,7 +2,11 @@ package com.example.fitnessbag.domain.models
 
 import android.os.Parcelable
 import com.example.fitnesbag.data.model.ExerciseEntity
+import com.example.fitnessbag.App
+import com.example.fitnessbag.R
 import kotlinx.parcelize.Parcelize
+
+private val exerciseTypesString by lazy { App.instance.baseContext.resources.getStringArray(R.array.exercise_types_dropdown) }
 
 enum class ExerciseConditionsType {
     TimeIsUp,
@@ -93,18 +97,11 @@ fun ExerciseConditionsType.toInt(): Int {
 }
 
 fun ExerciseConditionsType.toText(): String {
-    return when (this) {
-        ExerciseConditionsType.TimeIsUp -> "By time"
-        ExerciseConditionsType.CompleteRepetition -> "By repetition"
-    }
+    return exerciseTypesString[this.toInt()]
 }
 
 fun conditionTypeFrom(text: String): ExerciseConditionsType {
-    return when (text) {
-        "By time" -> ExerciseConditionsType.TimeIsUp
-        "By repetition" -> ExerciseConditionsType.CompleteRepetition
-        else -> throw IllegalArgumentException()
-    }
+    return conditionTypeFrom(exerciseTypesString.indexOf(text))
 }
 
 fun conditionTypeFrom(value: Int): ExerciseConditionsType {
@@ -115,14 +112,12 @@ fun conditionTypeFrom(value: Int): ExerciseConditionsType {
     }
 }
 
-private fun convertToConditionsType(it: String): ExerciseConditionsType {
-    return when (it) {
-        "By time" -> ExerciseConditionsType.TimeIsUp
-        "By repetition" -> ExerciseConditionsType.CompleteRepetition
-        else -> throw IllegalArgumentException()
+fun Exercise.getToDone(): Int {
+    return when (this) {
+        is RepeatExercise -> this.repeatTimes
+        is TimeExercise -> this.secondsToDone
     }
 }
-
 
 fun ExerciseEntity.toExercise(): Exercise {
     when (conditionTypeFrom(this.conditionsType) ) {

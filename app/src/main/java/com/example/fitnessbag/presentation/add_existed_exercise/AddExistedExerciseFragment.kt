@@ -31,6 +31,7 @@ class AddExistedExerciseFragment : Fragment() {
 
         val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
         binding.recyclerView.addItemDecoration(dividerItemDecoration)
+        binding.recyclerView.setHasFixedSize(true)
         
         viewModel.exercises.observe(viewLifecycleOwner) {
             filteredExistedExerciseAdapter = FilteredExistedExerciseAdapter(it) {
@@ -56,7 +57,7 @@ class AddExistedExerciseFragment : Fragment() {
         
         val menuItem = menu.findItem(R.id.search_item)
         val searchView = menuItem.actionView as SearchView
-        searchView.queryHint = "Поиск по упражнениям..."
+        searchView.queryHint = requireContext().getString(R.string.search_dots)
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(var1: String?): Boolean {
                 filteredExistedExerciseAdapter?.setTextFilter(var1!!)

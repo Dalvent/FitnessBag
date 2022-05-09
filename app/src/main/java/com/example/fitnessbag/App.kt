@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.example.fitnessbag.data.FitnessBagDatabase
 import com.example.fitnessbag.data.dao.ExerciseDao
 import com.example.fitnessbag.data.dao.WorkoutDao
-import com.example.fitnessbag.domain.repositories.*
+import com.example.fitnessbag.domain.*
 import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepository
 import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepositoryImpl
 import com.example.fitnessbag.domain.repositories.workout.WorkoutRepository
@@ -15,6 +15,7 @@ import com.example.fitnessbag.presentation.create_exersice.CreateExerciseViewMod
 import com.example.fitnessbag.presentation.create_workout.CreateWorkoutViewModel
 import com.example.fitnessbag.presentation.doing_workout.DoingWorkoutViewModel
 import com.example.fitnessbag.presentation.workout_detail.WorkoutDetailViewModel
+import com.example.fitnessbag.presentation.workout_history.WorkoutHistoryViewModel
 import com.example.fitnessbag.presentation.workouts_catalog.WorkoutCatalogViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -25,9 +26,14 @@ import org.koin.dsl.module
 
 class App() : Application() {
 
+    companion object {
+        lateinit var instance: App
+    }
+    
     override fun onCreate() {
+        instance = this
         super.onCreate()
-
+        
         val database = Room.databaseBuilder(
             baseContext,
             FitnessBagDatabase::class.java,
@@ -40,14 +46,18 @@ class App() : Application() {
 
             single<ExerciseRepository> { ExerciseRepositoryImpl(get()) }
             single<WorkoutRepository> { WorkoutRepositoryImpl(get(), get()) }
+            single<ImagePickerService> { DhavalImagePickerService() }
+            single<DefaultInsertDataService> { DefaultInsertDataServiceImpl(get()) }
+            single<AppInitService> { AppInitServiceImpl(get()) }
 
             viewModel { WorkoutCatalogViewModel(get()) }
             viewModel { WorkoutDetailViewModel(get()) }
             viewModel { DoingWorkoutViewModel(get()) }
             viewModel { AddExistedExerciseViewModel(get()) }
-            viewModel { CreateExerciseViewModel(get()) }
-            viewModel { CreateWorkoutViewModel(get()) }
-            viewModel { MainActivityViewModel(get()) }
+            viewModel { CreateExerciseViewModel(get(), get()) }
+            viewModel { CreateWorkoutViewModel(get(), get()) }
+            viewModel { MainViewModel(get(), get()) }
+            viewModel { WorkoutHistoryViewModel(get()) }
         }
 
         startKoin {

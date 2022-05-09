@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fitnessbag.R
 import com.example.fitnessbag.databinding.ItemBottomSpacerBinding
-import com.example.fitnessbag.databinding.ItemWorkoutInCatalotBinding
+import com.example.fitnessbag.databinding.ItemWorkoutInCatalogBinding
 import com.example.fitnessbag.databinding.LayoutWhatExerciseAddBinding
 import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.domain.models.Workout
@@ -81,7 +82,7 @@ class WorkoutsCatalogAdapter(
             return SpacerViewHolder(bottomSpacer)
         }
         
-        val view = ItemWorkoutInCatalotBinding.inflate(inflater, parent, false)
+        val view = ItemWorkoutInCatalogBinding.inflate(inflater, parent, false)
         
         return WorkoutInCatalogViewHolder(view, itemClick, itemMoreClick)
     }
@@ -102,7 +103,7 @@ class WorkoutsCatalogAdapter(
     }
     
     class WorkoutInCatalogViewHolder(
-        private val itemTagBinding: ItemWorkoutInCatalotBinding, 
+        private val itemTagBinding: ItemWorkoutInCatalogBinding,
         private val itemClick: ((model: Workout) -> Unit),
         private val itemMoreClick: ((model: Workout) -> Unit)) :
         RecyclerView.ViewHolder(itemTagBinding.root) {
@@ -117,7 +118,7 @@ class WorkoutsCatalogAdapter(
             itemTagBinding.moreButton.setOnClickListener {
                 itemMoreClick.invoke(model)
             }
-            itemTagBinding.imageView.loadImage(model.image)
+            itemTagBinding.imageView.loadImage(model.image, R.drawable.no_image_workout)
             itemTagBinding.root.setOnClickListener {
                 itemClick.invoke(model)
             }

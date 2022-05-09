@@ -1,18 +1,48 @@
 <resources>
     <string name="app_name">FitnessBag</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
+    
     <string name="workouts_fragment_label">Workouts</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="load_image">Load Image</string>
+    <string name="reset">Reset</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="seconds">Seconds</string>
+    <string name="rest_seconds">Rest seconds</string>
+    <string name="add">Add</string>
+    <string name="well_done">WELL DONE!</string>
+    <string name="doneCaps">DONE!</string>
+    <string name="rest_time">Rest time!!!</string>
+    <string name="add_10_seconds">Add 10 seconds</string>
+    <string name="skip">Skip</string>
+    <string name="tags">Tags:</string>
+    <string name="start">Start</string>
+    <string name="you_don_t_have_any_workouts_yet_try_adding_them">You don\'t have any workouts yet, try adding them!</string>
+    <string name="exercises">Exercises</string>
+    <string name="repeat_time">Repeat time</string>
+    <string name="add_new">Add new</string>
+    <string name="add_existed">Add existed</string>
+    <string name="create_by_template">Create by template</string>
+    <string name="remove">Remove</string>
+    <string name="search_dots">Search...</string>
+    <string name="repeats">Repeats</string>
+    <string name="pause">Pause</string>
+    <string name="create_workout">Create workout</string>
+    <string name="create_exercise">Create Exercise</string>
+    <string name="catalog">Catalog</string>
+    <string name="select_existed">Select existed</string>
 
-    <string-array name="exercise_types_dropdown">
-        <item>By time</item>
-        <item>By repetition</item>
-    </string-array>
+    <string name="push_ups">Push-ups</string>
+    <string name="pull_ups">Pull-ups</string>
+    <string name="bodyweight_squat">Bodyweight squat</string>
+    <string name="sit_ups">Sit-ups</string>
+    <string name="history">History</string>
+    
+    <string name="by_time">By time</string>
+    <string name="by_repetition">By repetition</string>
+    <string name="while_empty_you_need_to_workout">While empty! You need to workout!</string>
+
 </resources>

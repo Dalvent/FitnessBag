@@ -17,12 +17,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="16sp"
         tools:text="Tag" />
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="16dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="3dp"
         android:background="@drawable/shape_round_12"
         android:backgroundTint="@color/red_500"
         android:src="@drawable/ic_baseline_clear_24"

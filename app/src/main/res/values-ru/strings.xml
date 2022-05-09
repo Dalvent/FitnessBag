@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FitnessBag</string>
+
+    <string name="workouts_fragment_label">Тренировки</string>
+    <string name="next">Далее</string>
+    <string name="previous">До</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="load_image">Загрузить</string>
+    <string name="reset">Убрать</string>
+    <string name="name">Название</string>
+    <string name="description">Описние</string>
+    <string name="seconds">Секунды</string>
+    <string name="rest_seconds">Секунды отдыха</string>
+    <string name="add">Добавить</string>
+    <string name="well_done">ОТЛИЧНАЯ РАБОТА!</string>
+    <string name="doneCaps">ВСЕ!</string>
+    <string name="rest_time">Время отдыха!!!</string>
+    <string name="add_10_seconds">Добавить 10 секунд</string>
+    <string name="skip">Пропустить</string>
+    <string name="tags">Тэги:</string>
+    <string name="start">Начать</string>
+    <string name="you_don_t_have_any_workouts_yet_try_adding_them">У вас еще нет тренировок, попробуйте их добавит!</string>
+    <string name="exercises">Упражнения</string>
+    <string name="repeat_time">Кол-во повторений</string>
+    <string name="add_new">Создать новое</string>
+    <string name="add_existed">Добавить из каталога</string>
+    <string name="create_by_template">Создать по шаблону</string>
+    <string name="remove">Удалить</string>
+    <string name="search_dots">Поиск...</string>
+    <string name="repeats">Повторения</string>
+    <string name="pause">Пауза</string>
+    <string name="create_workout">Создать тренировку</string>
+    <string name="create_exercise">Создать упражнение</string>
+    <string name="catalog">Каталог</string>
+    <string name="select_existed">Выбрать существующих</string>
+
+    <string name="push_ups">Отжимания</string>
+    <string name="pull_ups">Подтягивания</string>
+    <string name="bodyweight_squat">Приседания</string>
+    <string name="sit_ups">Пресс</string>
+    <string name="history">История</string>
+
+    <string name="by_time">По времени</string>
+    <string name="by_repetition">По повторениям</string>
+    
+    <string name="while_empty_you_need_to_workout">Пока пусто! Нужно потренироваться!</string>
+</resources>

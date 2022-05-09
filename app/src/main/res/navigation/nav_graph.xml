@@ -12,11 +12,17 @@
         <argument
             android:name="workoutDetail"
             app:argType="com.example.fitnessbag.domain.models.WorkoutDetail" />
+        <action
+            android:id="@+id/action_doneWorkoutFragment_to_workoutsCatalogFragment"
+            app:destination="@id/workoutsCatalogFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/workoutsCatalogFragment"
+            app:popUpToInclusive="true" />/>
     </fragment>
     <fragment
         android:id="@+id/createWorkoutFragment"
         android:name="com.example.fitnessbag.presentation.create_workout.CreateWorkoutFragment"
-        android:label="Create Workout"
+        android:label="@string/create_workout"
         tools:layout="@layout/create_workout_fragment" >
         <action
             android:id="@+id/action_createWorkoutFragment_to_addExerciseFragment"
@@ -24,16 +30,18 @@
         <action
             android:id="@+id/action_createWorkoutFragment_to_addExistedExerciseFragment"
             app:destination="@id/addExistedExerciseFragment" />
+        <argument
+            android:name="workoutId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/addExerciseFragment"
         android:name="com.example.fitnessbag.presentation.create_exersice.CreateExerciseFragment"
-        android:label="Create Exercise"
+        android:label="@string/create_exercise"
         tools:layout="@layout/create_exercise_fragment" />
     <fragment
         android:id="@+id/doingWorkoutFragment"
         android:name="com.example.fitnessbag.presentation.doing_workout.DoingWorkoutFragment"
-        android:label="doing_workout_fragment"
         tools:layout="@layout/doing_workout_fragment" >
         <action
             android:id="@+id/action_doingWorkoutFragment_to_doneWorkoutFragment"
@@ -48,7 +56,7 @@
     <fragment
         android:id="@+id/workoutsCatalogFragment"
         android:name="com.example.fitnessbag.presentation.workouts_catalog.WorkoutsCatalogFragment"
-        android:label="Catalog"
+        android:label="@string/catalog"
         tools:layout="@layout/fragment_workouts" >
         <action
             android:id="@+id/action_workoutsCatalogFragment_to_workoutDetailFragment"
@@ -56,11 +64,13 @@
         <action
             android:id="@+id/action_workoutsCatalogFragment_to_createWorkoutFragment"
             app:destination="@id/createWorkoutFragment" />
+        <action
+            android:id="@+id/action_workoutsCatalogFragment_to_workoutHistoryFragment"
+            app:destination="@id/workoutHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/workoutDetailFragment"
-        android:name="com.example.fitnessbag.presentation.workout_detail.WorkoutDetailFragment"
-        android:label="WorkoutDetailFragment" >
+        android:name="com.example.fitnessbag.presentation.workout_detail.WorkoutDetailFragment">
         <action
             android:id="@+id/action_workoutDetailFragment_to_doingWorkoutFragment"
             app:destination="@id/doingWorkoutFragment" />
@@ -71,6 +81,11 @@
     <fragment
         android:id="@+id/addExistedExerciseFragment"
         android:name="com.example.fitnessbag.presentation.add_existed_exercise.AddExistedExerciseFragment"
-        android:label="add_existed_exercise_fragment"
+        android:label="@string/select_existed"
         tools:layout="Choose Exercise" />
+    <fragment
+        android:id="@+id/workoutHistoryFragment"
+        android:name="com.example.fitnessbag.presentation.workout_history.WorkoutHistoryFragment"
+        android:label="@string/history"
+        tools:layout="@layout/workout_history_fragment" />
 </navigation>

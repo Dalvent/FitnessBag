@@ -1,5 +1,6 @@
 package com.example.fitnessbag.presentation.create_exersice
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.fitnessbag.domain.ImagePickerService
 import com.example.fitnessbag.domain.models.ExerciseConditionsType
@@ -30,18 +31,20 @@ class CreateExerciseViewModel(private val exerciseRepository: ExerciseRepository
     private val _restSeconds = MutableLiveData<Int>()
     val restSeconds: MutableLiveData<Int> = _restSeconds
 
+    var _pathUrl = MutableLiveData<String>("")
+    val pathUrl: LiveData<String> get() = _pathUrl
+    fun setUrl(value: String) {
+        if(_pathUrl.value == value)
+            return;
+
+        _pathUrl.value = value
+    }
+
     fun setName(value: String) {
         if (value == _name.value)
             return
 
         _name.value = value
-    }
-
-    fun setDescription(value: String) {
-        if (value == _description.value)
-            return
-
-        _description.value = value
     }
 
     fun setExerciseExecutionConditionsType(value: ExerciseConditionsType) {
@@ -73,52 +76,43 @@ class CreateExerciseViewModel(private val exerciseRepository: ExerciseRepository
     }
 
     fun save(): Exercise {
-        if(!isValid())
-            throw ValidationException()
+        checkValidation()
         
         return when(exerciseConditionsType.value) {
             ExerciseConditionsType.TimeIsUp -> exerciseRepository.createNewTimeExercise(
-                name.value!!,
-                description.value!!,
-                "",
-                secondsToDone.value!!,
-                restSeconds.value!!
+                name.value ?: "",
+                pathUrl.value ?: "",
+                description.value ?: "",
+                secondsToDone.value ?: 0,
+                restSeconds.value ?: 0
             )
             ExerciseConditionsType.CompleteRepetition ->  exerciseRepository.createNewRepeatExercise(
-                name.value!!,
-                description.value!!,
-                "",
-                repeatTimes.value!!,
-                restSeconds.value!!
+                name.value ?: "",
+                pathUrl.value ?: "",
+                description.value ?: "",
+                repeatTimes.value ?: 0,
+                restSeconds.value ?: 0
             )
             null -> throw NotImplementedError()
         }
     }
 
-    private fun isValid(): Boolean {
-        if (_name.value == null || _name.value == "")
-            return false
-
-        if (_description.value == null || _description.value == "")
-            return false
-
-        if (_exerciseExecutionConditionsType.value == null)
-            return false
+    private fun checkValidation() {
+        if (_name.value.isNullOrBlank())
+            throw ValidationException("Fill name!")
 
         when (_exerciseExecutionConditionsType.value) {
             ExerciseConditionsType.TimeIsUp -> {
                 if (_secondsToDone.value == null || _secondsToDone.value!! < 0)
-                    return false
+                    throw ValidationException("Fill seconds to done!")
             }
             ExerciseConditionsType.CompleteRepetition -> {
                 if (_repeatTimes.value == null || _repeatTimes.value!! < 0)
-                    return false
+                    throw ValidationException("Fill repeat times!")
             }
         }
 
         if (_restSeconds.value == null || _restSeconds.value!! < 0)
-            return false
-        
-        return true
+            throw ValidationException("Fill rest seconds!!")
     }
 }

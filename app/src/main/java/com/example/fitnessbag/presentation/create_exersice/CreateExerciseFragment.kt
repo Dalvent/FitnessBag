@@ -1,6 +1,6 @@
 package com.example.fitnessbag.presentation.create_exersice
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.fitnessbag.R
 import com.example.fitnessbag.domain.models.ExerciseConditionsType
 import com.example.fitnessbag.databinding.CreateExerciseFragmentBinding
+import com.example.fitnessbag.domain.models.conditionTypeFrom
+import com.example.fitnessbag.domain.models.toInt
 import com.example.fitnessbag.presentation.create_workout.CreateWorkoutFragment
 import com.example.fitnessbag.presentation.utils.loadImage
 import com.example.fitnessbag.utils.ValidationException
@@ -27,6 +29,7 @@ class CreateExerciseFragment : Fragment() {
     
     private val viewModel: CreateExerciseViewModel by viewModel()
     
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,28 +40,37 @@ class CreateExerciseFragment : Fragment() {
         binding.nameTextInputEditText.addTextChangedListener {
             viewModel.setName(it.toString())
         }
-        binding.descriptionTextInputEditText.addTextChangedListener {
-            viewModel.setDescription(it.toString())
-        }
         binding.countTextInputEditText.addTextChangedListener {
-            val value = it?.toString()?.toInt()
-            viewModel.setRepeatTimes(value!!)
+            val valueString = it?.toString()
+            if(valueString.isNullOrBlank())
+                viewModel.setRepeatTimes(0)
+            else
+                viewModel.setRepeatTimes(valueString.toInt())
         }
         binding.secondsTextInputEditText.addTextChangedListener {
-            val value = it?.toString()?.toInt()
-            viewModel.setSecondsToDone(value!!)
+            val valueString = it?.toString()
+            if(valueString.isNullOrBlank())
+                viewModel.setSecondsToDone(0)
+            else
+                viewModel.setSecondsToDone(valueString.toInt())
         }
         binding.restSecondsTextInputEditText.addTextChangedListener {
-            val value = it?.toString()?.toInt()
-            viewModel.setRestSeconds(value!!)
+            val valueString = it?.toString()
+            if(valueString.isNullOrBlank())
+                viewModel.setRestSeconds(0)
+            else
+                viewModel.setRestSeconds(valueString.toInt())
         }
         binding.exerciseTypeDropDown.addTextChangedListener {
-            viewModel.setExerciseExecutionConditionsType(convertToConditionsType(it.toString()))
+            viewModel.setExerciseExecutionConditionsType(conditionTypeFrom(it.toString()))
         }
         binding.loadImageButton.setOnClickListener {
             viewModel.imagePickerService.pickImage { uri ->
-                binding.exerciseImageView.loadImage(uri.toString())
+                viewModel.setUrl(uri.toString())
             }
+        }
+        binding.resetImageButton.setOnClickListener {
+            viewModel.setUrl("")
         }
         binding.addButton.setOnClickListener {
             try {
@@ -70,8 +82,15 @@ class CreateExerciseFragment : Fragment() {
                 findNavController().navigateUp()
             }
             catch (ex: ValidationException) {
-                Toast.makeText(requireContext(), "Fill all fields!!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), ex.reason, Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+        }
+
+        viewModel.pathUrl.observe(viewLifecycleOwner) {
+            binding.exerciseImageView.loadImage(it, R.drawable.no_image_exercise)
+            
+            binding.resetImageButton.isEnabled = it != ""
         }
         
         viewModel.name.observe(viewLifecycleOwner) {
@@ -88,7 +107,7 @@ class CreateExerciseFragment : Fragment() {
         }
         viewModel.exerciseConditionsType.observe(viewLifecycleOwner) {
             val exerciseTypes = resources.getStringArray(R.array.exercise_types_dropdown)
-            val itString = exerciseTypes[toInt(it)]
+            val itString = exerciseTypes[it.toInt()]
             
             if((binding.exerciseTypeDropDown.text?.toString()?.equals(itString)) != true) {
                 binding.exerciseTypeDropDown.setText(itString.toString())
@@ -127,20 +146,5 @@ class CreateExerciseFragment : Fragment() {
         }
         
         return binding.root
-    }
-    
-    private fun convertToConditionsType(it: String): ExerciseConditionsType {
-        return when(it) {
-            "By time" -> ExerciseConditionsType.TimeIsUp
-            "By repetition" -> ExerciseConditionsType.CompleteRepetition
-            else -> throw IllegalArgumentException()
-        }
-    }
-    
-    private fun toInt(it: ExerciseConditionsType): Int {
-        return when(it) {
-            ExerciseConditionsType.TimeIsUp -> 0
-            ExerciseConditionsType.CompleteRepetition -> 1
-        }
     }
 }

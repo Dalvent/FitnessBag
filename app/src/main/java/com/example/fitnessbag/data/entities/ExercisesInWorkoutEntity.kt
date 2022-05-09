@@ -9,10 +9,11 @@ import com.example.fitnesbag.data.model.ExerciseEntity
 import com.example.fitnesbag.data.model.WorkoutEntity
 
 @Entity(
-    primaryKeys = ["exerciseId", "workoutId"],
+    primaryKeys = ["exerciseId", "workoutId", "number"],
     indices = [
         Index(value = ["exerciseId"]),
-        Index(value = ["workoutId"])
+        Index(value = ["workoutId"]),
+        Index(value = ["number"]),
     ],
     foreignKeys = arrayOf(
     ForeignKey(
@@ -29,5 +30,9 @@ import com.example.fitnesbag.data.model.WorkoutEntity
 ))
 class ExercisesInWorkoutEntity(
     var exerciseId: Long,
-    var workoutId: Long
+    var workoutId: Long,
+    var number: Int,
+    var repeatTimes: Int,
+    var secondsToDone: Int,
+    var restSeconds: Int
 )

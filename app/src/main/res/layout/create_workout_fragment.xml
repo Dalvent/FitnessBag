@@ -27,36 +27,67 @@
                 android:id="@+id/nameTextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Название"
+                android:hint="@string/name"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageView
-            android:id="@+id/exerciseImageView"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/cardview_dark_background"
-            android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="H,1:1"
+            android:layout_marginEnd="32dp"
+            android:minWidth="150dp"
+            android:minHeight="150dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintDimensionRatio="W,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/exerciseImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_dark_background"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_image_workout"
+                app:layout_constraintDimensionRatio="W,1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/resetImageButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:enabled="false"
+            android:padding="6dp"
+            android:text="@string/reset"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/loadImageButton"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
         <Button
             android:id="@+id/loadImageButton"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingHorizontal="32dp"
-            android:text="Load Image"
-            app:layout_constraintStart_toStartOf="@+id/exerciseImageView"
-            app:layout_constraintTop_toBottomOf="@+id/exerciseImageView" />
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:padding="6dp"
+            android:text="@string/load_image"
+            app:layout_constraintEnd_toStartOf="@+id/resetImageButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/descriptionTextInputLayout"
@@ -72,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:hint="Your long hint"
+                android:hint="@string/description"
                 android:inputType="textMultiLine"
                 android:lines="6"
                 android:padding="10dp" />
@@ -91,28 +122,38 @@
             tools:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
             tools:listitem="@layout/item_tag" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/exercisesRecyclerView"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/exercisesCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
-            android:paddingHorizontal="16dp"
-            android:nestedScrollingEnabled="true"
+            app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tagsRecyclerView"
-            tools:listitem="@layout/item_added_exercise" />
+            app:layout_constraintTop_toBottomOf="@+id/tagsRecyclerView">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/exercisesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="120dp"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_added_exercise" />
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/addButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/red_500"
-            android:text="Add"
+            android:text="@string/add"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/exercisesRecyclerView" />
-        
+            app:layout_constraintTop_toBottomOf="@+id/exercisesCardView" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

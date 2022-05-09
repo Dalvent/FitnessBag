@@ -1,6 +1,8 @@
 package com.example.fitnessbag.presentation.doing_workout.doing_exerise
 
 import androidx.lifecycle.viewModelScope
+import com.example.fitnessbag.App
+import com.example.fitnessbag.R
 import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.domain.models.TimeExercise
 import com.example.fitnessbag.presentation.doing_workout.WorkoutNavigator
@@ -27,7 +29,7 @@ class TimeDoingExerciseViewModel(private val workoutNavigator: WorkoutNavigator,
     }
 
     private fun startTimer() {
-        _specialButtonText.value = "Pause"
+        _specialButtonText.value = App.instance.getString(R.string.pause)
         timerJob = viewModelScope.launch {
             while (remainingTime > 0) {
                 delay(1000)
@@ -39,7 +41,7 @@ class TimeDoingExerciseViewModel(private val workoutNavigator: WorkoutNavigator,
     }
     
     private fun stopTimer() {
-        _specialButtonText.value = "Start"
+        _specialButtonText.value = App.instance.getString(R.string.start)
         timerJob!!.cancel()
         timerJob = null
     }

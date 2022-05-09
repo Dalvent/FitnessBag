@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.fitnessbag.databinding.ActivityMainBinding
+import com.example.fitnessbag.presentation.CustomBackPressed
 import com.github.dhaval2404.imagepicker.ImagePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var activity: WeakReference<Activity>
     }
 
-    private val viewModel: MainActivityViewModel by viewModel()
+    private val viewModel: MainViewModel by viewModel()
 
     private var isShowKeyboard = false
     private var navController: NavController? = null
@@ -38,17 +40,20 @@ class MainActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        viewModel.initIfNeeded(this)
+
+        setTheme(R.style.FitnessBagTheme_NoActionBar)
+        
         activity = WeakReference(this)
 
+        initListeners()
+        
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
-
         navController = findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(navController!!)
-
-        initListeners()
     }
 
     private fun initListeners() {
@@ -67,6 +72,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() {
+        val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val fragment = navHost.childFragmentManager.fragments.first()
+        if(fragment is CustomBackPressed) {
+            if(!fragment.onBackPressed())
+                return
+        }
+            
+        super.onBackPressed()
+    }
+    
     override fun onSupportNavigateUp(): Boolean {
         return navController!!.navigateUp()
                 || super.onSupportNavigateUp()

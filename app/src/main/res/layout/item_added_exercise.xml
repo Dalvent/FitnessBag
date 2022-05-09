@@ -5,26 +5,81 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/exerciseImageView"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="20dp"
-        tools:text="Title" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/exerciseImageView"
+        app:layout_constraintTop_toTopOf="@+id/exerciseImageView"
+        tools:text="Name" />
 
     <TextView
-        android:id="@+id/countTextView"
+        android:id="@+id/toDoneTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentEnd="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp"
+        android:minWidth="90dp"
+        android:text="@string/repeat_time"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toDoneEditText"
+        app:layout_constraintStart_toEndOf="@+id/exerciseImageView"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+    <EditText
+        android:id="@+id/toDoneEditText"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="-16dp"
+        android:textSize="14sp"
+        android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/removeButton"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="x62" />
+        app:layout_constraintStart_toEndOf="@+id/toDoneTextView"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:minWidth="90dp"
+        android:text="@string/rest_seconds"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/restSecondsEditText"
+        app:layout_constraintStart_toEndOf="@+id/exerciseImageView"
+        app:layout_constraintTop_toBottomOf="@+id/toDoneTextView" />
+
+    <EditText
+        android:id="@+id/restSecondsEditText"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-4dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="14sp"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/removeButton"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/toDoneEditText" />
 
     <ImageButton
         android:id="@+id/removeButton"
@@ -36,5 +91,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/red_500" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:alpha="0.1"
+        android:background="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/exerciseImageView"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

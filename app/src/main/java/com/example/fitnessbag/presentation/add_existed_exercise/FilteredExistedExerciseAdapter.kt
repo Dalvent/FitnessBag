@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fitnessbag.R
 import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.databinding.ItemImageExerciseBinding
 import com.example.fitnessbag.domain.startWithLower
@@ -66,8 +67,7 @@ class FilteredExistedExerciseAdapter(val exercises: List<Exercise>, private val 
         
         fun setModel(model: Exercise) {
             this.model = model
-            binding.exerciseImageView.loadImage(model.image)
-            binding.descriptionTextView.text = model.description
+            binding.exerciseImageView.loadImage(model.image, R.drawable.no_image_exercise)
             binding.titleTextView.text = model.name
             binding.restSecondsTextView.text = model.restSeconds.toSecondsToDoneString()
             binding.toDoneTextView.text = model.toDoneToString()

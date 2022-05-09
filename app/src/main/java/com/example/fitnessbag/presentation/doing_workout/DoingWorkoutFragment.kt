@@ -1,27 +1,30 @@
 package com.example.fitnessbag.presentation.doing_workout
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.fitnessbag.R
 import com.example.fitnessbag.databinding.DoingWorkoutFragmentBinding
+import com.example.fitnessbag.presentation.CustomBackPressed
 import com.example.fitnessbag.presentation.doing_workout.doing_exerise.DoingExerciseFragment
 import com.example.fitnessbag.presentation.doing_workout.rest.RestFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DoingWorkoutFragment() : Fragment() {
+
+class DoingWorkoutFragment() : Fragment(), CustomBackPressed {
     private val viewModel: DoingWorkoutViewModel by viewModel()
     private val args: DoingWorkoutFragmentArgs by navArgs()
-    
-    val workoutNavigator: WorkoutNavigator get() = viewModel 
-    
+
+    val workoutNavigator: WorkoutNavigator get() = viewModel
+
     private var _binding: DoingWorkoutFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -31,18 +34,23 @@ class DoingWorkoutFragment() : Fragment() {
     ): View? {
 
         _binding = DoingWorkoutFragmentBinding.inflate(inflater, container, false)
-        
-        getActionBar()?.hide()
-        
+
         binding.backImageView.setOnClickListener {
-            findNavController().navigateUp()
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage("Are you sure want to leave?")
+            builder.setPositiveButton("Yes",) { var1, var2 ->
+                findNavController().navigateUp()
+            }
+            builder.setNegativeButton("No") { var1, var2 ->
+            }
+            builder.create().show()
         }
-        viewModel.initialize(args.workoutDetail.exercises)
-        
+        viewModel.initialize(args.workoutDetail)
+
         viewModel.doingWorkoutState.observe(viewLifecycleOwner) {
             navigateByState(it)
         }
-        
+
         return binding.root
     }
 
@@ -51,8 +59,14 @@ class DoingWorkoutFragment() : Fragment() {
             DoingWorkoutState.Exercise -> {
                 childFragmentManager.commit {
                     val bundle = Bundle()
-                    bundle.putParcelable(DoingExerciseFragment.DOING_EXERCISE_MODEL, viewModel!!.currentExercise())
-                    replace<DoingExerciseFragment>(R.id.doingWorkoutFragmentContainer, args = bundle)
+                    bundle.putParcelable(
+                        DoingExerciseFragment.DOING_EXERCISE_MODEL,
+                        viewModel!!.currentExercise()
+                    )
+                    replace<DoingExerciseFragment>(
+                        R.id.doingWorkoutFragmentContainer,
+                        args = bundle
+                    )
                 }
             }
             DoingWorkoutState.Rest -> {
@@ -64,7 +78,10 @@ class DoingWorkoutFragment() : Fragment() {
                 }
             }
             DoingWorkoutState.End -> {
-                val action = DoingWorkoutFragmentDirections.actionDoingWorkoutFragmentToDoneWorkoutFragment(args.workoutDetail)
+                val action =
+                    DoingWorkoutFragmentDirections.actionDoingWorkoutFragmentToDoneWorkoutFragment(
+                        args.workoutDetail
+                    )
                 findNavController().navigate(action)
             }
         }
@@ -72,10 +89,35 @@ class DoingWorkoutFragment() : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        getActionBar()?.hide()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
         getActionBar()?.show()
     }
 
     private fun getActionBar() = getCompatActivity().supportActionBar
 
     private fun getCompatActivity() = (activity as AppCompatActivity)
+    
+    override fun onBackPressed(): Boolean {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setMessage("Are you sure want to leave?")
+        builder.setPositiveButton("Yes",) { var1, var2 ->
+            findNavController().navigateUp()
+        }
+        builder.setNegativeButton("No") { var1, var2 ->
+        }
+        val alertDialog = builder.create()
+        alertDialog.show()
+        
+        return false
+    }
 }

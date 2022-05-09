@@ -16,6 +16,9 @@ class WorkoutDetailViewModel(private val workoutRepository: WorkoutRepository
     private val _name = MutableLiveData<String>()
     val name: LiveData<String> = _name
 
+    private val _imageUrl = MutableLiveData<String>()
+    val imageUrl: LiveData<String> = _imageUrl
+
     private val _description = MutableLiveData<String>()
     val description: LiveData<String> = _description
 
@@ -29,6 +32,7 @@ class WorkoutDetailViewModel(private val workoutRepository: WorkoutRepository
         startLoading()
         workoutModel = workoutRepository.getDetailed(id)
         _name.value = workoutModel.name
+        _imageUrl.value = workoutModel.image
         _description.value = workoutModel.description
         _tags.value = workoutModel.tags
         _exercise.value = workoutModel.exercises

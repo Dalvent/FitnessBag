@@ -1,8 +1,7 @@
 package com.example.fitnessbag.domain.repositories.exercise
 
-import com.example.fitnessbag.domain.models.Exercise
-import com.example.fitnessbag.domain.models.RepeatExercise
-import com.example.fitnessbag.domain.models.TimeExercise
+import com.example.fitnessbag.domain.models.*
+import java.util.*
 
 interface ExerciseRepository {
     fun getAll(): List<Exercise>

@@ -11,7 +11,7 @@
     android:paddingHorizontal="9dp"
     android:paddingVertical="3dp"
     android:textColor="@color/white"
-    android:textSize="12sp"
+    android:textSize="16sp"
     tools:text="Tag"
     android:inputType="text"
     android:imeOptions="actionGo" />

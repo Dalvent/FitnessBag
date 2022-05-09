@@ -3,6 +3,7 @@ package com.example.fitnessbag.domain.repositories.exercise
 import com.example.fitnesbag.data.model.ExerciseEntity
 import com.example.fitnessbag.data.dao.ExerciseDao
 import com.example.fitnessbag.domain.models.*
+import java.util.*
 
 class ExerciseRepositoryImpl(val exerciseDao: ExerciseDao) : ExerciseRepository {
     override fun getAll(): List<Exercise> {
@@ -17,7 +18,7 @@ class ExerciseRepositoryImpl(val exerciseDao: ExerciseDao) : ExerciseRepository 
         restSeconds: Int
     ): TimeExercise {
         val entity = ExerciseEntity(
-            -1,
+            null,
             name,
             description,
             image,
