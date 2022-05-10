@@ -34,18 +34,8 @@ fun ImageView.loadImage(imageUrl: String?, placeholderDrawable: Int) {
         return
     }
 
-    if(imageUrl.startsWith("android.resource")) {
-        Picasso.get()
-            .load(Uri.parse(imageUrl))
-            .fit().centerCrop()
-            .placeholder(R.drawable.solid_grey)
-            .into(this)
-
-        return
-    }
-
     Picasso.get()
-        .load(imageUrl)
+        .load(Uri.parse(imageUrl))
         .fit().centerCrop()
         .placeholder(R.drawable.solid_grey)
         .into(this)

@@ -19,4 +19,5 @@ interface ExerciseRepository {
         repeatTimes: Int,
         restSeconds: Int = 30
     ): RepeatExercise
+    fun remove(exercise: Exercise)
 }

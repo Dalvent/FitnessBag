@@ -81,15 +81,15 @@ class CreateExerciseViewModel(private val exerciseRepository: ExerciseRepository
         return when(exerciseConditionsType.value) {
             ExerciseConditionsType.TimeIsUp -> exerciseRepository.createNewTimeExercise(
                 name.value ?: "",
-                pathUrl.value ?: "",
                 description.value ?: "",
+                pathUrl.value ?: "",
                 secondsToDone.value ?: 0,
                 restSeconds.value ?: 0
             )
             ExerciseConditionsType.CompleteRepetition ->  exerciseRepository.createNewRepeatExercise(
                 name.value ?: "",
-                pathUrl.value ?: "",
                 description.value ?: "",
+                pathUrl.value ?: "",
                 repeatTimes.value ?: 0,
                 restSeconds.value ?: 0
             )

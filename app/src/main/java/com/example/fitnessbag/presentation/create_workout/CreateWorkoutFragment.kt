@@ -41,18 +41,19 @@ class CreateWorkoutFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if(args.workoutId != (-1).toLong()) {
+            viewModel.loadTemplate(args.workoutId)
+        }
+        
         setFragmentResultListener(SELECTED_EXERCISE) { key, bundle ->
             addExercisesAdapter!!.addExercise(bundle.getParcelable(SELECTED_EXERCISE)!!)
         }
     }
-
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if(args.workoutId != (-1).toLong()) {
-            viewModel.loadTemplate(args.workoutId)
-        }
         
         _binding = CreateWorkoutFragmentBinding.inflate(inflater, container, false)
 

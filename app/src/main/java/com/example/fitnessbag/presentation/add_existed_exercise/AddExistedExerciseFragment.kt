@@ -34,7 +34,7 @@ class AddExistedExerciseFragment : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         
         viewModel.exercises.observe(viewLifecycleOwner) {
-            filteredExistedExerciseAdapter = FilteredExistedExerciseAdapter(it) {
+            filteredExistedExerciseAdapter = FilteredExistedExerciseAdapter(it, viewModel) {
                 setFragmentResult(CreateWorkoutFragment.SELECTED_EXERCISE, Bundle().apply { 
                     this.putParcelable(CreateWorkoutFragment.SELECTED_EXERCISE, it)
                 })

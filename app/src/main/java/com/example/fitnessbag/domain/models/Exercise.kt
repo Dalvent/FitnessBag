@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.example.fitnesbag.data.model.ExerciseEntity
 import com.example.fitnessbag.App
 import com.example.fitnessbag.R
+import com.example.fitnessbag.data.entities.ExercisesInWorkoutEntity
 import kotlinx.parcelize.Parcelize
 
 private val exerciseTypesString by lazy { App.instance.baseContext.resources.getStringArray(R.array.exercise_types_dropdown) }
@@ -117,6 +118,23 @@ fun Exercise.getToDone(): Int {
         is RepeatExercise -> this.repeatTimes
         is TimeExercise -> this.secondsToDone
     }
+}
+
+fun Exercise.toEntity(): ExerciseEntity {
+    var secondsToDone = 0
+    var repeatTimes = 0
+    var conditionsType = ExerciseConditionsType.TimeIsUp
+
+    if(this is TimeExercise) {
+        secondsToDone = this.secondsToDone
+        conditionsType = ExerciseConditionsType.TimeIsUp
+    }
+    if(this is RepeatExercise) {
+        repeatTimes = this.repeatTimes
+        conditionsType = ExerciseConditionsType.CompleteRepetition
+    }
+
+    return ExerciseEntity(this.id!!, this.name, this.description, this.image, conditionsType.toInt(), repeatTimes, secondsToDone, this.restSeconds, false)
 }
 
 fun ExerciseEntity.toExercise(): Exercise {

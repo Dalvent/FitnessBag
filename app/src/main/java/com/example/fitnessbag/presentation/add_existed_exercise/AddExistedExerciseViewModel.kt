@@ -13,4 +13,8 @@ class AddExistedExerciseViewModel(val exerciseRepository: ExerciseRepository) : 
     init {
         _exercises.value = exerciseRepository.getAll()
     }
+    
+    fun remove(exercise: Exercise) {
+        exerciseRepository.remove(exercise)
+    }
 }

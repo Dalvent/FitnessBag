@@ -3,7 +3,6 @@ package com.example.fitnessbag.domain.repositories.exercise
 import com.example.fitnesbag.data.model.ExerciseEntity
 import com.example.fitnessbag.data.dao.ExerciseDao
 import com.example.fitnessbag.domain.models.*
-import java.util.*
 
 class ExerciseRepositoryImpl(val exerciseDao: ExerciseDao) : ExerciseRepository {
     override fun getAll(): List<Exercise> {
@@ -25,7 +24,8 @@ class ExerciseRepositoryImpl(val exerciseDao: ExerciseDao) : ExerciseRepository 
             ExerciseConditionsType.TimeIsUp.toInt(),
             0,
             secondsToDone,
-            restSeconds
+            restSeconds,
+            false
         )
         exerciseDao.insert(entity)
 
@@ -47,10 +47,17 @@ class ExerciseRepositoryImpl(val exerciseDao: ExerciseDao) : ExerciseRepository 
             ExerciseConditionsType.CompleteRepetition.toInt(),
             repeatTimes,
             0,
-            restSeconds
+            restSeconds,
+            false
         )
         entity.id = exerciseDao.insert(entity)
 
         return entity.toExercise() as RepeatExercise
+    }
+
+    override fun remove(exercise: Exercise) {
+        val exerciseEntity = exercise.toEntity()
+        exerciseEntity.isDeleted = true
+        exerciseDao.update(exerciseEntity)
     }
 }

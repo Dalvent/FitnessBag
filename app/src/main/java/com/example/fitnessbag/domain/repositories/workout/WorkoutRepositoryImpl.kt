@@ -63,7 +63,7 @@ class WorkoutRepositoryImpl(
         if(exercise is RepeatExercise) 
             repeatTimes = exercise.repeatTimes
 
-        return ExercisesInWorkoutEntity(exercise.id!!, workoutId, exercisesNumber, repeatTimes, secondsToDone, exercise.restSeconds, )
+        return ExercisesInWorkoutEntity(exercise.id!!, workoutId, exercisesNumber, repeatTimes, secondsToDone, exercise.restSeconds)
     }
 
     override fun delete(workout: Workout) {
