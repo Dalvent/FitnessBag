@@ -27,7 +27,7 @@ class ExerciseRepositoryImpl(val exerciseDao: ExerciseDao) : ExerciseRepository 
             restSeconds,
             false
         )
-        exerciseDao.insert(entity)
+        entity.id = exerciseDao.insert(entity)
 
         return entity.toExercise() as TimeExercise
     }

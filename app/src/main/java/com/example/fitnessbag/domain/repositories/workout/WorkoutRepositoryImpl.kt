@@ -54,7 +54,7 @@ class WorkoutRepositoryImpl(
         return toDetail(entity)
     }
     
-    fun convertToExercisesInWorkout(exercise: Exercise, workoutId: Long, exercisesNumber: Int): ExercisesInWorkoutEntity {
+    private fun convertToExercisesInWorkout(exercise: Exercise, workoutId: Long, exercisesNumber: Int): ExercisesInWorkoutEntity {
         var secondsToDone = 0
         var repeatTimes = 0 
         
