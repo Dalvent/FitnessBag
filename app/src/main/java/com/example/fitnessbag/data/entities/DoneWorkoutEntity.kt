@@ -9,13 +9,11 @@ import com.example.fitnesbag.data.model.WorkoutEntity
 import java.util.*
 
 @Entity(
-    foreignKeys = arrayOf(
-        ForeignKey(
-            entity = WorkoutEntity::class,
-            parentColumns = ["id"],
-            childColumns = ["workoutId"]
-        )
-    )
+    foreignKeys = [ForeignKey(
+        entity = WorkoutEntity::class,
+        parentColumns = ["id"],
+        childColumns = ["workoutId"]
+    )]
 )
 data class DoneWorkoutEntity(
     @PrimaryKey(autoGenerate = true)
