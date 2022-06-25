@@ -5,11 +5,11 @@ import androidx.room.Room
 import com.example.fitnessbag.data.FitnessBagDatabase
 import com.example.fitnessbag.data.dao.ExerciseDao
 import com.example.fitnessbag.data.dao.WorkoutDao
-import com.example.fitnessbag.domain.*
 import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepository
 import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepositoryImpl
 import com.example.fitnessbag.domain.repositories.workout.WorkoutRepository
 import com.example.fitnessbag.domain.repositories.workout.WorkoutRepositoryImpl
+import com.example.fitnessbag.domain.services.*
 import com.example.fitnessbag.presentation.add_existed_exercise.AddExistedExerciseViewModel
 import com.example.fitnessbag.presentation.create_exersice.CreateExerciseViewModel
 import com.example.fitnessbag.presentation.create_workout.CreateWorkoutViewModel

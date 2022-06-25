@@ -16,7 +16,7 @@
         android:id="@+id/backImageView"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/shape_oval"
+        android:background="#00000000"
         android:padding="8dp"
         android:scaleType="center"
         android:src="@drawable/ic_baseline_arrow_back_24"

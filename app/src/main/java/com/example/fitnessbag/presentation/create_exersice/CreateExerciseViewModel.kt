@@ -2,7 +2,7 @@ package com.example.fitnessbag.presentation.create_exersice
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.fitnessbag.domain.ImagePickerService
+import com.example.fitnessbag.domain.services.ImagePickerService
 import com.example.fitnessbag.domain.models.ExerciseConditionsType
 import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepository

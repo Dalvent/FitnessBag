@@ -1,6 +1,5 @@
-package com.example.fitnessbag.domain
+package com.example.fitnessbag.domain.services
 
-import android.net.Uri
 import com.example.fitnessbag.App
 import com.example.fitnessbag.BuildConfig
 import com.example.fitnessbag.R
@@ -11,7 +10,8 @@ interface DefaultInsertDataService {
     fun insertDefault()
 }
 
-class DefaultInsertDataServiceImpl(val exerciseRepository: ExerciseRepository) : DefaultInsertDataService {
+class DefaultInsertDataServiceImpl(val exerciseRepository: ExerciseRepository) :
+    DefaultInsertDataService {
     override fun insertDefault() {
         exerciseRepository.createNewRepeatExercise(
             App.instance.baseContext.getString(R.string.push_ups),

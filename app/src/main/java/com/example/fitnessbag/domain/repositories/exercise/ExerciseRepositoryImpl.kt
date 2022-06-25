@@ -9,6 +9,10 @@ class ExerciseRepositoryImpl(val exerciseDao: ExerciseDao) : ExerciseRepository 
         return exerciseDao.getAll().map { it.toExercise() }
     }
 
+    override fun getInWorkout(workoutId: Long, number: Int): ExerciseEntity {
+        return exerciseDao.getFor(workoutId, number)
+    }
+
     override fun createNewTimeExercise(
         name: String,
         description: String,
