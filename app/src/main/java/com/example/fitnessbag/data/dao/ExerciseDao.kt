@@ -17,6 +17,16 @@ interface ExerciseDao {
     fun getFor(workoutId: Long): List<ExerciseEntity>
 
     @Query(
+        "SELECT exercise.id, exercise.name, exercise.description, exercise.image, exercise.conditionsType, inWorkout.repeatTimes, inWorkout.secondsToDone, inWorkout.restSeconds, exercise.isDeleted " +
+                "FROM ExerciseEntity AS exercise " +
+                "INNER JOIN ExercisesInWorkoutEntity AS inWorkout ON exercise.id == inWorkout.exerciseId " +
+                "WHERE inWorkout.workoutId == :workoutId AND inWorkout.number = :number " +
+                "ORDER BY inWorkout.number " +
+                "LIMIT 1;"
+    )
+    fun getFor(workoutId: Long, number: Int): ExerciseEntity
+
+    @Query(
         "SELECT * FROM ExerciseEntity" +
                 " WHERE NOT isDeleted")
     fun getAll(): List<ExerciseEntity>

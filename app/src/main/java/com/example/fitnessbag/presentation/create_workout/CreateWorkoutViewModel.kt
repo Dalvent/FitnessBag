@@ -3,7 +3,7 @@ package com.example.fitnessbag.presentation.create_workout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.fitnessbag.domain.ImagePickerService
+import com.example.fitnessbag.domain.services.ImagePickerService
 import com.example.fitnessbag.domain.models.Exercise
 import com.example.fitnessbag.domain.models.Workout
 import com.example.fitnessbag.domain.models.getToDone

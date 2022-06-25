@@ -1,4 +1,4 @@
-package com.example.fitnessbag.domain
+package com.example.fitnessbag.domain.services
 
 import android.net.Uri
 import com.example.fitnessbag.MainActivity

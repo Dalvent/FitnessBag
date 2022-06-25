@@ -1,8 +1,6 @@
-package com.example.fitnessbag.domain
+package com.example.fitnessbag.domain.services
 
 import android.content.Context
-import com.example.fitnessbag.App
-import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepository
 
 interface AppInitService {
     fun isInitialized(context: Context): Boolean

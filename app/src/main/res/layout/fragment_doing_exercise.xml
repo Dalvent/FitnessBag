@@ -6,6 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".presentation.doing_workout.doing_exerise.DoingExerciseFragment">
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/exerciseNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="16dp"
+            tools:text="16/32"
+            android:textSize="20sp"/>
+
+    </FrameLayout>
+
     <ImageView
         android:id="@+id/exercisesImageView"
         android:layout_width="0dp"
@@ -14,7 +33,19 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+    <ProgressBar
+        android:id="@+id/workoutProgressProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:progress="10"
+        android:max="100"
+        android:indeterminate="false"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exercisesImageView" />
 
     <TextView
         android:id="@+id/titleTextView"

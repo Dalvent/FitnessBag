@@ -2,8 +2,8 @@ package com.example.fitnessbag
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.example.fitnessbag.domain.AppInitService
-import com.example.fitnessbag.domain.ImagePickerService
+import com.example.fitnessbag.domain.services.AppInitService
+import com.example.fitnessbag.domain.services.ImagePickerService
 
 class MainViewModel(val imagePickerService: ImagePickerService, val appInitService: AppInitService) : ViewModel() {
     fun initIfNeeded(context: Context) {
