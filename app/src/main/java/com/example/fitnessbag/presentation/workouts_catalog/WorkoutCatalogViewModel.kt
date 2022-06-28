@@ -3,11 +3,14 @@ package com.example.fitnessbag.presentation.workouts_catalog
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessbag.domain.models.Workout
+import com.example.fitnessbag.domain.repositories.exercise.ExerciseRepository
 import com.example.fitnessbag.domain.repositories.workout.WorkoutRepository
 import com.example.fitnessbag.presentation.BaseViewModel
 import kotlinx.coroutines.launch
 
-class WorkoutCatalogViewModel(private val workoutRepository: WorkoutRepository
+class WorkoutCatalogViewModel(
+    private val workoutRepository: WorkoutRepository,
+    private val exerciseRepository: ExerciseRepository,
 ) : BaseViewModel() {
 
     private val _categories = MutableLiveData<List<Workout>>()
@@ -32,6 +35,10 @@ class WorkoutCatalogViewModel(private val workoutRepository: WorkoutRepository
     fun deleteWorkout(workout: Workout) {
         workoutRepository.delete(workout)
         (_categories.value as MutableList<Workout>).remove(workout)
+    }
+    
+    fun getJson() {
+        
     }
     
     fun update() {

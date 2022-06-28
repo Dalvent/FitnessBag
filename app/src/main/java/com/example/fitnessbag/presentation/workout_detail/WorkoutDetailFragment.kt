@@ -17,6 +17,7 @@ import com.example.fitnessbag.domain.models.RepeatExercise
 import com.example.fitnessbag.domain.models.TimeExercise
 import com.example.fitnessbag.presentation.TagsAdapter
 import com.example.fitnessbag.presentation.applyTagsStyle
+import com.example.fitnessbag.presentation.doing_workout.DoingWorkoutProgress
 import com.example.fitnessbag.presentation.utils.loadImage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -83,7 +84,9 @@ class WorkoutDetailFragment : Fragment() {
         }
         
         binding.startButton.setOnClickListener {
-            val action = WorkoutDetailFragmentDirections.actionWorkoutDetailFragmentToDoingWorkoutFragment(viewModel.workoutModel)
+            val action = WorkoutDetailFragmentDirections.actionWorkoutDetailFragmentToDoingExerciseFragment(
+                DoingWorkoutProgress.startNewProgress(viewModel.workoutModel)
+            )
             findNavController().navigate(action)
         }
         

@@ -13,7 +13,9 @@ import com.example.fitnessbag.domain.services.*
 import com.example.fitnessbag.presentation.add_existed_exercise.AddExistedExerciseViewModel
 import com.example.fitnessbag.presentation.create_exersice.CreateExerciseViewModel
 import com.example.fitnessbag.presentation.create_workout.CreateWorkoutViewModel
-import com.example.fitnessbag.presentation.doing_workout.DoingWorkoutViewModel
+import com.example.fitnessbag.presentation.doing_workout.doing_exerise.DoingExerciseViewModel
+import com.example.fitnessbag.presentation.doing_workout.rest.RestViewModel
+import com.example.fitnessbag.presentation.settings.SettingsViewModel
 import com.example.fitnessbag.presentation.workout_detail.WorkoutDetailViewModel
 import com.example.fitnessbag.presentation.workout_history.WorkoutHistoryViewModel
 import com.example.fitnessbag.presentation.workouts_catalog.WorkoutCatalogViewModel
@@ -41,6 +43,7 @@ class App() : Application() {
         ).allowMainThreadQueries().build()
 
         val module = module {
+            single<FitnessBagDatabase> { database }
             single<ExerciseDao> { database.getExerciseDao() }
             single<WorkoutDao> { database.getWorkoutDao() }
 
@@ -49,15 +52,18 @@ class App() : Application() {
             single<ImagePickerService> { DhavalImagePickerService() }
             single<DefaultInsertDataService> { DefaultInsertDataServiceImpl(get()) }
             single<AppInitService> { AppInitServiceImpl(get()) }
+            single<DbClearService> { DbClearServiceImpl(get()) }
 
-            viewModel { WorkoutCatalogViewModel(get()) }
+            viewModel { WorkoutCatalogViewModel(get(), get()) }
             viewModel { WorkoutDetailViewModel(get()) }
-            viewModel { DoingWorkoutViewModel(get()) }
             viewModel { AddExistedExerciseViewModel(get()) }
             viewModel { CreateExerciseViewModel(get(), get()) }
             viewModel { CreateWorkoutViewModel(get(), get()) }
             viewModel { MainViewModel(get(), get()) }
+            viewModel { RestViewModel(get()) }
             viewModel { WorkoutHistoryViewModel(get()) }
+            viewModel { DoingExerciseViewModel(get()) }
+            viewModel { SettingsViewModel(get()) }
         }
 
         startKoin {

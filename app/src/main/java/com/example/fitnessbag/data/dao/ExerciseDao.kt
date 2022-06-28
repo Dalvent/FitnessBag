@@ -8,7 +8,7 @@ import com.example.fitnessbag.data.entities.ExercisesInWorkoutEntity
 @Dao
 interface ExerciseDao {
     @Query(
-        "SELECT exercise.id, exercise.name, exercise.description, exercise.image, exercise.conditionsType, inWorkout.repeatTimes, inWorkout.secondsToDone, inWorkout.restSeconds, exercise.isDeleted " +
+        "SELECT exercise.id, exercise.name, exercise.description, exercise.image, exercise.conditionsType, inWorkout.repeatTimes, inWorkout.secondsToDone, inWorkout.restSeconds, exercise.isDefault, exercise.isDeleted " +
                 "FROM ExerciseEntity AS exercise " +
                 "INNER JOIN ExercisesInWorkoutEntity AS inWorkout ON exercise.id == inWorkout.exerciseId " +
                 "WHERE inWorkout.workoutId == :workoutId " +
@@ -17,7 +17,7 @@ interface ExerciseDao {
     fun getFor(workoutId: Long): List<ExerciseEntity>
 
     @Query(
-        "SELECT exercise.id, exercise.name, exercise.description, exercise.image, exercise.conditionsType, inWorkout.repeatTimes, inWorkout.secondsToDone, inWorkout.restSeconds, exercise.isDeleted " +
+        "SELECT exercise.id, exercise.name, exercise.description, exercise.image, exercise.conditionsType, inWorkout.repeatTimes, inWorkout.secondsToDone, inWorkout.restSeconds, exercise.isDefault, exercise.isDeleted " +
                 "FROM ExerciseEntity AS exercise " +
                 "INNER JOIN ExercisesInWorkoutEntity AS inWorkout ON exercise.id == inWorkout.exerciseId " +
                 "WHERE inWorkout.workoutId == :workoutId AND inWorkout.number = :number " +

@@ -6,6 +6,7 @@ import com.example.fitnessbag.App
 import com.example.fitnessbag.R
 import com.example.fitnessbag.data.entities.ExercisesInWorkoutEntity
 import kotlinx.parcelize.Parcelize
+import java.lang.RuntimeException
 
 private val exerciseTypesString by lazy { App.instance.baseContext.resources.getStringArray(R.array.exercise_types_dropdown) }
 
@@ -134,7 +135,14 @@ fun Exercise.toEntity(): ExerciseEntity {
         conditionsType = ExerciseConditionsType.CompleteRepetition
     }
 
-    return ExerciseEntity(this.id!!, this.name, this.description, this.image, conditionsType.toInt(), repeatTimes, secondsToDone, this.restSeconds, false)
+    return ExerciseEntity(this.id!!, this.name, this.description, this.image, conditionsType.toInt(), repeatTimes, secondsToDone, this.restSeconds, false, false)
+}
+
+fun Exercise.getConditionType(): ExerciseConditionsType {
+    return when (this) {
+        is RepeatExercise -> ExerciseConditionsType.CompleteRepetition
+        is TimeExercise -> ExerciseConditionsType.TimeIsUp
+    }
 }
 
 fun ExerciseEntity.toExercise(): Exercise {

@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.fitnessbag"
-        minSdk 26
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -39,6 +39,7 @@ android {
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.preference:preference:1.1.1'
     kapt 'org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.3.0'
 
     // Android KTX

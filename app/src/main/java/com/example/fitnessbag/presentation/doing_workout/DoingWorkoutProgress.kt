@@ -27,6 +27,8 @@ data class DoingWorkoutProgress(
         }
     }
 
+    fun isDonned() = exercisesCount < currentExerciseNumber
+    
     fun doneExercise() {
         donnedExerciseNumbers.add(currentExerciseNumber)
         currentExerciseNumber++
@@ -37,7 +39,7 @@ data class DoingWorkoutProgress(
         currentExerciseNumber++
     }
 
-    fun previousExercise(currentExerciseNumber: Int) {
+    fun previousExercise() {
         if(skippedExerciseNumbers.contains(currentExerciseNumber))
             skippedExerciseNumbers.remove(currentExerciseNumber)
         else

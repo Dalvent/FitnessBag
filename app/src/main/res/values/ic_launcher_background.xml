@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#FF2D2D</color>
+    <drawable name="ic_launcher_background">@drawable/red_gradient</drawable>
 </resources>

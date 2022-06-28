@@ -7,12 +7,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.fitnessbag.App
 import com.example.fitnessbag.R
 import com.example.fitnessbag.databinding.FragmentWorkoutsBinding
 import com.example.fitnessbag.databinding.LayoutWhatWorkoutMoreBinding
 import com.example.fitnessbag.domain.models.Workout
-import com.example.fitnessbag.presentation.create_workout.CreateWorkoutFragmentDirections
+import com.example.fitnessbag.presentation.execute
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -76,6 +75,9 @@ class WorkoutsCatalogFragment : Fragment() {
         val layoutWhatExerciseAdd = LayoutWhatWorkoutMoreBinding.inflate(layoutInflater)
         bottomSheetDialog.setContentView(layoutWhatExerciseAdd.root)
 
+        layoutWhatExerciseAdd.shareLinearLayout.setOnClickListener {
+            
+        }
         layoutWhatExerciseAdd.deleteLinearLayout.setOnClickListener {
             workoutsCatalogAdapter!!.removeWithViewModel(this.model, workout)
             bottomSheetDialog.hide()
@@ -92,7 +94,7 @@ class WorkoutsCatalogFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_search_history, menu)
+        inflater.inflate(R.menu.menu_search_history_settings, menu)
 
         val menuItem = menu.findItem(R.id.search_item)
         val searchView = menuItem.actionView as SearchView
@@ -115,6 +117,12 @@ class WorkoutsCatalogFragment : Fragment() {
             return@setOnMenuItemClickListener true
         }
 
+        val settingsItem = menu.findItem(R.id.settings_item)
+        settingsItem.setOnMenuItemClickListener {
+            WorkoutsCatalogFragmentDirections.actionWorkoutsCatalogFragmentToSettingsFragment().execute(findNavController())
+            return@setOnMenuItemClickListener true
+        }
+        
         super.onCreateOptionsMenu(menu, inflater)
     }
 

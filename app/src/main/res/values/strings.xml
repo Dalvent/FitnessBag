@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">FitnessBag</string>
-    
+
     <string name="workouts_fragment_label">Workouts</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
@@ -26,6 +26,7 @@
     <string name="add_new">Add new</string>
     <string name="add_existed">Add existed</string>
     <string name="create_by_template">Create by template</string>
+    <string name="share">Share</string>
     <string name="remove">Remove</string>
     <string name="search_dots">Search...</string>
     <string name="repeats">Repeats</string>
@@ -39,10 +40,16 @@
     <string name="pull_ups">Pull-ups</string>
     <string name="bodyweight_squat">Bodyweight squat</string>
     <string name="sit_ups">Sit-ups</string>
+    <string name="shrugs_with_barbell">Shrugs with a barbell</string>
     <string name="history">History</string>
-    
+
     <string name="by_time">By time</string>
     <string name="by_repetition">By repetition</string>
     <string name="while_empty_you_need_to_workout">While empty! You need to workout!</string>
+    <string name="required">Required: </string>
+    <string name="rest">"Rest: "</string>
+    <string name="yes">YES</string>
+    
+    <string name="clear_data">Clear data</string>
 
 </resources>

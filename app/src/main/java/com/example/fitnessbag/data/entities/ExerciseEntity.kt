@@ -14,5 +14,6 @@ data class ExerciseEntity(
         var repeatTimes: Int,
         var secondsToDone: Int,
         var restSeconds: Int,
+        var isDefault: Boolean,
         var isDeleted: Boolean
 )

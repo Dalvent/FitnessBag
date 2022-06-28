@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_workoutsCatalogFragment_to_workoutHistoryFragment"
             app:destination="@id/workoutHistoryFragment" />
+        <action
+            android:id="@+id/action_workoutsCatalogFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/workoutDetailFragment"
@@ -111,4 +114,8 @@
             android:name="progress"
             app:argType="com.example.fitnessbag.presentation.doing_workout.DoingWorkoutProgress" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.fitnessbag.presentation.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

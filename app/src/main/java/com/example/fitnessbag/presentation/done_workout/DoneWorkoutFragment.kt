@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.fitnessbag.R
 import com.example.fitnessbag.databinding.DoneWorkoutFragmentBinding
 import com.example.fitnessbag.presentation.CustomBackPressed
 
 class DoneWorkoutFragment : Fragment(), CustomBackPressed {
+    
+    val args: DoneWorkoutFragmentArgs by navArgs()
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -19,8 +23,14 @@ class DoneWorkoutFragment : Fragment(), CustomBackPressed {
         val binding = DoneWorkoutFragmentBinding.inflate(inflater, container, false)
         
         binding.backImageView.setOnClickListener {
-            val action = DoneWorkoutFragmentDirections.actionDoneWorkoutFragmentToWorkoutsCatalogFragment()
-            findNavController().navigate(action)
+            onBackPressed()
+        }
+        
+        binding.donnedExercises.text = args.workoutProgress.donnedExerciseNumbers.size.toString()
+        binding.skippedExercises.text = args.workoutProgress.skippedExerciseNumbers.size.toString()
+        
+        binding.yesButton.setOnClickListener {
+            onBackPressed()
         }
         
         return binding.root

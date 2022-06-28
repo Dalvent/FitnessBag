@@ -91,7 +91,7 @@ class CreateExerciseViewModel(private val exerciseRepository: ExerciseRepository
                 description.value ?: "",
                 pathUrl.value ?: "",
                 repeatTimes.value ?: 0,
-                restSeconds.value ?: 0
+                restSeconds.value ?: 0,
             )
             null -> throw NotImplementedError()
         }

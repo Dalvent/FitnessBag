@@ -24,6 +24,7 @@
     <string name="you_don_t_have_any_workouts_yet_try_adding_them">У вас еще нет тренировок, попробуйте их добавит!</string>
     <string name="exercises">Упражнения</string>
     <string name="repeat_time">Кол-во повторений</string>
+    <string name="share">Поделится</string>
     <string name="add_new">Создать новое</string>
     <string name="add_existed">Добавить из каталога</string>
     <string name="create_by_template">Создать по шаблону</string>
@@ -46,4 +47,10 @@
     <string name="by_repetition">По повторениям</string>
     
     <string name="while_empty_you_need_to_workout">Пока пусто! Нужно потренироваться!</string>
+    <string name="required">Требуется: </string>
+    <string name="rest">Отдых: </string>
+    <string name="yes">О ДА</string>
+
+    <string name="clear_data">Удалить все данные</string>
+    <string name="shrugs_with_barbell">Шраги со штангой</string>
 </resources>
